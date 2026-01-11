@@ -1,6 +1,7 @@
 import React from 'react';
+import './css/Fashion.css';
 
-const HomePage = ({ onProductClick }) => {
+const HomePage = ({ onProductClick, onCategoryClick }) => {
   // Fungsi untuk fitur yang belum diimplementasikan
   const handleAlert = (e) => {
     e.preventDefault();
@@ -22,45 +23,58 @@ const HomePage = ({ onProductClick }) => {
 
       {/* 2. FEATURE ICONS (VIP, Games, Fashion, dll) */}
       <section className="bg-light py-3 border-bottom overflow-auto">
-        <div className="d-flex justify-content-start px-3 gap-4 flex-nowrap text-center">
-          <div className="feature-item" onClick={handleAlert} style={{ cursor: 'pointer', minWidth: '60px' }}>
-            <div className="rounded-circle bg-gold d-flex align-items-center justify-content-center mx-auto mb-1 shadow-sm" style={{ width: '50px', height: '50px', backgroundColor: '#fcf4e0', border: '1px solid #bfa76a' }}>
-              <i className="bi bi-stars fs-4" style={{ color: '#bfa76a' }}></i>
-            </div>
-            <span style={{ fontSize: '12px', fontWeight: '500' }}>VIP</span>
-          </div>
-          <div className="feature-item" onClick={handleAlert} style={{ cursor: 'pointer', minWidth: '60px' }}>
-            <div className="rounded-circle d-flex align-items-center justify-content-center mx-auto mb-1 shadow-sm" style={{ width: '50px', height: '50px', backgroundColor: '#fcf4e0', border: '1px solid #bfa76a' }}>
-              <i className="bi bi-controller fs-4" style={{ color: '#bfa76a' }}></i>
-            </div>
-            <span style={{ fontSize: '12px', fontWeight: '500' }}>Games</span>
-          </div>
-          <div className="feature-item" onClick={handleAlert} style={{ cursor: 'pointer', minWidth: '60px' }}>
-            <div className="rounded-circle d-flex align-items-center justify-content-center mx-auto mb-1 shadow-sm" style={{ width: '50px', height: '50px', backgroundColor: '#fcf4e0', border: '1px solid #bfa76a' }}>
-              <i className="bi bi-bag-heart fs-4" style={{ color: '#bfa76a' }}></i>
-            </div>
-            <span style={{ fontSize: '12px', fontWeight: '500' }}>Fashion</span>
-          </div>
-          <div className="feature-item" onClick={handleAlert} style={{ cursor: 'pointer', minWidth: '60px' }}>
-            <div className="rounded-circle d-flex align-items-center justify-content-center mx-auto mb-1 shadow-sm" style={{ width: '50px', height: '50px', backgroundColor: '#fcf4e0', border: '1px solid #bfa76a' }}>
-              <i className="bi bi-magic fs-4" style={{ color: '#bfa76a' }}></i>
-            </div>
-            <span style={{ fontSize: '12px', fontWeight: '500' }}>Beauty</span>
-          </div>
-          <div className="feature-item" onClick={handleAlert} style={{ cursor: 'pointer', minWidth: '60px' }}>
-            <div className="rounded-circle d-flex align-items-center justify-content-center mx-auto mb-1 shadow-sm" style={{ width: '50px', height: '50px', backgroundColor: '#fcf4e0', border: '1px solid #bfa76a' }}>
-              <i className="bi bi-cpu fs-4" style={{ color: '#bfa76a' }}></i>
-            </div>
-            <span style={{ fontSize: '12px', fontWeight: '500' }}>Tech</span>
-          </div>
-          <div className="feature-item" onClick={handleAlert} style={{ cursor: 'pointer', minWidth: '60px' }}>
-            <div className="rounded-circle d-flex align-items-center justify-content-center mx-auto mb-1 shadow-sm" style={{ width: '50px', height: '50px', backgroundColor: '#fcf4e0', border: '1px solid #bfa76a' }}>
-              <i className="bi bi-grid fs-4" style={{ color: '#bfa76a' }}></i>
-            </div>
-            <span style={{ fontSize: '12px', fontWeight: '500' }}>More</span>
-          </div>
-        </div>
-      </section>
+  <div className="d-flex justify-content-start px-3 gap-4 flex-nowrap text-center">
+    {/* VIP - Masih Alert */}
+    <div className="feature-item" onClick={handleAlert} style={{ cursor: 'pointer', minWidth: '60px' }}>
+      <div className="rounded-circle d-flex align-items-center justify-content-center mx-auto mb-1 shadow-sm" style={{ width: '50px', height: '50px', backgroundColor: '#fcf4e0', border: '1px solid #bfa76a' }}>
+        <i className="bi bi-stars fs-4" style={{ color: '#bfa76a' }}></i>
+      </div>
+      <span style={{ fontSize: '12px', fontWeight: '500' }}>VIP</span>
+    </div>
+
+    {/* GAMES - Masih Alert */}
+    <div className="feature-item" onClick={handleAlert} style={{ cursor: 'pointer', minWidth: '60px' }}>
+      <div className="rounded-circle d-flex align-items-center justify-content-center mx-auto mb-1 shadow-sm" style={{ width: '50px', height: '50px', backgroundColor: '#fcf4e0', border: '1px solid #bfa76a' }}>
+        <i className="bi bi-controller fs-4" style={{ color: '#bfa76a' }}></i>
+      </div>
+      <span style={{ fontSize: '12px', fontWeight: '500' }}>Games</span>
+    </div>
+
+    {/* FASHION - Terhubung ke FashionPage */}
+    <div className="feature-item" onClick={() => onCategoryClick('fashion')} style={{ cursor: 'pointer', minWidth: '60px' }}>
+      <div className="rounded-circle d-flex align-items-center justify-content-center mx-auto mb-1 shadow-sm" style={{ width: '50px', height: '50px', backgroundColor: '#fcf4e0', border: '1px solid #bfa76a' }}>
+        <i className="bi bi-bag-heart fs-4" style={{ color: '#bfa76a' }}></i>
+      </div>
+      <span style={{ fontSize: '12px', fontWeight: '500' }}>Fashion</span>
+    </div>
+
+    {/* BEAUTY - Terhubung ke BeautyPage */}
+    <div className="feature-item" onClick={() => onCategoryClick('beauty')} style={{ cursor: 'pointer', minWidth: '60px' }}>
+      <div className="rounded-circle d-flex align-items-center justify-content-center mx-auto mb-1 shadow-sm" style={{ width: '50px', height: '50px', backgroundColor: '#fcf4e0', border: '1px solid #bfa76a' }}>
+        <i className="bi bi-magic fs-4" style={{ color: '#bfa76a' }}></i>
+      </div>
+      <span style={{ fontSize: '12px', fontWeight: '500' }}>Beauty</span>
+    </div>
+    
+    {/* TECH - Terhubung ke TechPage */}
+    <div className="feature-item" onClick={() => onCategoryClick('tech')} style={{ cursor: 'pointer', minWidth: '60px' }}>
+      <div className="rounded-circle d-flex align-items-center justify-content-center mx-auto mb-1 shadow-sm" style={{ width: '50px', height: '50px', backgroundColor: '#fcf4e0', border: '1px solid #bfa76a' }}>
+        <i className="bi bi-cpu fs-4" style={{ color: '#bfa76a' }}></i>
+      </div>
+      <span style={{ fontSize: '12px', fontWeight: '500' }}>Tech</span>
+    </div>
+
+    {/* MORE - Masih Alert */}
+    <div className="feature-item" onClick={handleAlert} style={{ cursor: 'pointer', minWidth: '60px' }}>
+      <div className="rounded-circle d-flex align-items-center justify-content-center mx-auto mb-1 shadow-sm" style={{ width: '50px', height: '50px', backgroundColor: '#fcf4e0', border: '1px solid #bfa76a' }}>
+        <i className="bi bi-grid fs-4" style={{ color: '#bfa76a' }}></i>
+      </div>
+      <span style={{ fontSize: '12px', fontWeight: '500' }}>More</span>
+    </div>
+  </div>
+</section>
+
+
 
       {/* 3. BANNER PROMOSI (Horizontal Scroll) */}
       <section className="banner-scroll py-3 overflow-auto">
