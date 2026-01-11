@@ -12,3 +12,262 @@ Jumlah halaman : 22
 
 Nilai yang kami harapkan : 90 ke atas
 Alasan : Karena kami sudah berupaya semaksimal mungkin sesuai kapasitas kami masing-masing dalam mengerjakan tugas web ini untuk nilai yang terbaik, berusaha untuk menjelaskan semua fitur dan tampilan web dalam waktu yang cukup singkat bagi kami yakni dalam 10 menit. Harapan terhadap nilai yang tinggi ini bukan karena keinginan memperoleh angka besar, melainkan sebagai bentuk apresiasi atas usaha dan tanggung jawab kami.
+import React from 'react';
+
+const HomePage = () => {
+  // Fungsi untuk menangani klik fitur yang belum tersedia
+  const handleAlert = (e) => {
+    e.preventDefault();
+    alert('Coming Soon!');
+  };
+
+  return (
+    <div className="home-page">
+      {/* Header */}
+      <header className="bg-gold p-3 d-flex align-items-center justify-content-between">
+        <div className="input-group w-75">
+          <span className="input-group-text border-0 bg-white">
+            <i className="bi bi-search text-gold"></i>
+          </span>
+          <input type="text" className="form-control border-0" placeholder="Cari di Laudepedia..." />
+        </div>
+        <i 
+          className="bi bi-cart ms-3 text-white fs-4" 
+          style={{ cursor: 'pointer' }} 
+          onClick={handleAlert}
+        ></i>
+      </header>
+
+      {/* Feature Icons */}
+      <section className="bg-light py-3 overflow-auto">
+        <div className="d-flex justify-content-start px-3 gap-4 flex-nowrap">
+          <a href="#" className="item text-decoration-none text-dark" onClick={handleAlert}>
+            <div className="text-center flex-shrink-0">
+              <div className="icon-circle bg-gold mb-1 d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px', borderRadius: '50%' }}>
+                <i className="bi bi-stars text-white fs-4"></i>
+              </div>
+              <p className="small mb-0">VIP</p>
+            </div>
+          </a>
+
+          <a href="#" className="item text-decoration-none text-dark" onClick={handleAlert}>
+            <div className="text-center flex-shrink-0">
+              <div className="icon-circle bg-gold mb-1 d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px', borderRadius: '50%' }}>
+                <i className="bi bi-controller text-white fs-4"></i>
+              </div>
+              <p className="small mb-0">Games</p>
+            </div>
+          </a>
+
+          <a href="/fashion" className="item text-decoration-none text-dark">
+            <div className="text-center flex-shrink-0">
+              <div className="icon-circle bg-gold mb-1 d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px', borderRadius: '50%' }}>
+                <i className="bi bi-bag-heart text-white fs-4"></i>
+              </div>
+              <p className="small mb-0">Fashion</p>
+            </div>
+          </a>
+
+          <a href="#" className="item text-decoration-none text-dark" onClick={handleAlert}>
+            <div className="text-center flex-shrink-0">
+              <div className="icon-circle bg-gold mb-1 d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px', borderRadius: '50%' }}>
+                <i className="bi bi-brush text-white fs-4"></i>
+              </div>
+              <p className="small mb-0">Beauty</p>
+            </div>
+          </a>
+
+          <a href="#" className="item text-decoration-none text-dark" onClick={handleAlert}>
+            <div className="text-center flex-shrink-0">
+              <div className="icon-circle bg-gold mb-1 d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px', borderRadius: '50%' }}>
+                <i className="bi bi-cpu text-white fs-4"></i>
+              </div>
+              <p className="small mb-0">Tech</p>
+            </div>
+          </a>
+
+          <a href="#" className="item text-decoration-none text-dark" onClick={handleAlert}>
+            <div className="text-center flex-shrink-0">
+              <div className="icon-circle bg-gold mb-1 d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px', borderRadius: '50%' }}>
+                <i className="bi bi-grid text-white fs-4"></i>
+              </div>
+              <p className="small mb-0">More</p>
+            </div>
+          </a>
+
+          <a href="#" className="item ms-auto text-center text-decoration-none text-dark" onClick={handleAlert}>
+            <div className="text-center flex-shrink-0">
+              <p className="fs-4 mb-0">About Us</p>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      {/* Scrollable Banner */}
+      <section className="banner-scroll py-2">
+        <div className="d-flex overflow-auto px-3 gap-3">
+          <img src="resources/128453e1-1e18-4c8f-b631-713a198eec59.jpg" className="rounded-4 banner-img flex-shrink-0" style={{ width: '280px' }} alt="Banner 1" />
+          <img src="resources/16ac2a31-1777-4bb4-be25-b752342d9e8c.jpg" className="rounded-4 banner-img flex-shrink-0" style={{ width: '280px' }} alt="Banner 2" />
+          <img src="resources/832817ec-0a21-4b18-a15c-befa0921fe77.jpg" className="rounded-4 banner-img flex-shrink-0" style={{ width: '280px' }} alt="Banner 3" />
+          <img src="resources/9e819acf-3670-4ad3-b49b-563e272d022a.jpg" className="rounded-4 banner-img flex-shrink-0" style={{ width: '280px' }} alt="Banner 4" />
+          <img src="resources/7ab3d36d-b872-4ee4-8264-32bed5b6d568.jpg" className="rounded-4 banner-img flex-shrink-0" style={{ width: '280px' }} alt="Banner 5" />
+        </div>
+      </section>
+
+      {/* LaudeLive Section */}
+      <section className="container my-3">
+        <div className="d-flex justify-content-between align-items-center mb-2">
+          <h5 className="text-gold fw-semibold mb-0">LaudeVideo</h5>
+          <a href="#" className="text-decoration-none small text-gold" onClick={handleAlert}>See All →</a>
+        </div>
+        <div className="row g-2">
+          <div className="col-6">
+            <video 
+              src="resources/Oakley_-_Just_dropped_Oakley_Meta_Vanguard._These_new_Performance_AI_glasses_..._268NR0.mp4" 
+              className="w-100 rounded-3" 
+              controls 
+              poster="resources/live1.jpg"
+              autoPlay muted loop
+            ></video>
+          </div>
+          <div className="col-6">
+            <video 
+              src="resources/New_Balance_-_Josh_Allen_Professional_QB1._JoshAllenQB_FBFpeG.mp4" 
+              className="w-100 rounded-3" 
+              controls 
+              poster="resources/live2.jpg"
+              autoPlay muted loop
+            ></video>
+          </div>
+        </div>
+      </section>
+
+      {/* Product Display */}
+      <section className="container my-3 pb-5">
+        <div className="d-flex justify-content-between align-items-center mb-2">
+          <h5 className="text-gold fw-semibold mb-0">Produk Pilihan</h5>
+          <a href="#" className="text-decoration-none small text-gold" onClick={handleAlert}>See All →</a>
+        </div>
+
+        <div className="row row-cols-2 row-cols-md-4 g-3">
+          {/* Card B9 */}
+          <div className="col">
+            <a href="#" className="text-decoration-none" onClick={handleAlert}>
+              <div className="product-card position-relative overflow-hidden rounded-4 shadow-sm border">
+                <img src="resources/B9.jpg" className="w-100 product-img" alt="B9" />
+                <div className="price-overlay position-absolute bottom-0 w-100 p-2" style={{ background: 'rgba(212, 175, 55, 0.8)' }}>
+                  <p className="mb-0 text-white fw-semibold small">Rp 550.000</p>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          {/* Card T2 */}
+          <div className="col">
+            <a href="#" className="text-decoration-none" onClick={handleAlert}>
+              <div className="product-card position-relative overflow-hidden rounded-4 shadow-sm border">
+                <img src="resources/T2.jpg" className="w-100 product-img" alt="T2" />
+                <div className="price-overlay position-absolute bottom-0 w-100 p-2" style={{ background: 'rgba(212, 175, 55, 0.8)' }}>
+                  <p className="mb-0 text-white fw-semibold small">Rp 180.000</p>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          {/* Card B10 */}
+          <div className="col">
+            <a href="#" className="text-decoration-none" onClick={handleAlert}>
+              <div className="product-card position-relative overflow-hidden rounded-4 shadow-sm border">
+                <img src="resources/B10.jpg" className="w-100 product-img" alt="B10" />
+                <div className="price-overlay position-absolute bottom-0 w-100 p-2" style={{ background: 'rgba(212, 175, 55, 0.8)' }}>
+                  <p className="mb-0 text-white fw-semibold small">Rp 226.000</p>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          {/* Card S1 */}
+          <div className="col">
+            <a href="#" className="text-decoration-none" onClick={handleAlert}>
+              <div className="product-card position-relative overflow-hidden rounded-4 shadow-sm border">
+                <img src="resources/S1.jpg" className="w-100 product-img" alt="S1" />
+                <div className="price-overlay position-absolute bottom-0 w-100 p-2" style={{ background: 'rgba(212, 175, 55, 0.8)' }}>
+                  <p className="mb-0 text-white fw-semibold small">Rp 350.000</p>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          {/* Card B3 */}
+          <div className="col">
+            <a href="#" className="text-decoration-none" onClick={handleAlert}>
+              <div className="product-card position-relative overflow-hidden rounded-4 shadow-sm border">
+                <img src="resources/B3.jpg" className="w-100 product-img" alt="B3" />
+                <div className="price-overlay position-absolute bottom-0 w-100 p-2" style={{ background: 'rgba(212, 175, 55, 0.8)' }}>
+                  <p className="mb-0 text-white fw-semibold small">Rp 2.500.000</p>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          {/* Card B2 */}
+          <div className="col">
+            <a href="#" className="text-decoration-none" onClick={handleAlert}>
+              <div className="product-card position-relative overflow-hidden rounded-4 shadow-sm border">
+                <img src="resources/B2.jpg" className="w-100 product-img" alt="B2" />
+                <div className="price-overlay position-absolute bottom-0 w-100 p-2" style={{ background: 'rgba(212, 175, 55, 0.8)' }}>
+                  <p className="mb-0 text-white fw-semibold small">Rp 950.000</p>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          {/* Card B5 */}
+          <div className="col">
+            <a href="#" className="text-decoration-none" onClick={handleAlert}>
+              <div className="product-card position-relative overflow-hidden rounded-4 shadow-sm border">
+                <img src="resources/B5.jpg" className="w-100 product-img" alt="B5" />
+                <div className="price-overlay position-absolute bottom-0 w-100 p-2" style={{ background: 'rgba(212, 175, 55, 0.8)' }}>
+                  <p className="mb-0 text-white fw-semibold small">Rp 600.000</p>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          {/* Card B7 */}
+          <div className="col">
+            <a href="#" className="text-decoration-none" onClick={handleAlert}>
+              <div className="product-card position-relative overflow-hidden rounded-4 shadow-sm border">
+                <img src="resources/B7.jpg" className="w-100 product-img" alt="B7" />
+                <div className="price-overlay position-absolute bottom-0 w-100 p-2" style={{ background: 'rgba(212, 175, 55, 0.8)' }}>
+                  <p className="mb-0 text-white fw-semibold small">Rp 500.000</p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer Navbar */}
+      <nav className="bottom-nav d-flex justify-content-around align-items-center py-2 border-top bg-white fixed-bottom">
+        <a href="#" className="text-center text-decoration-none text-gold active">
+          <i className="bi bi-house-fill fs-5"></i><br /><small>Beranda</small>
+        </a>
+        <a href="#" className="text-center text-gold text-decoration-none" onClick={handleAlert}>
+          <i className="bi bi-fire fs-5"></i><br /><small>Trending</small>
+        </a>
+        <a href="#" className="text-center text-gold text-decoration-none" onClick={handleAlert}>
+          <i className="bi bi-camera-video fs-5"></i><br /><small>Live</small>
+        </a>
+        <a href="#" className="text-center text-gold text-decoration-none" onClick={handleAlert}>
+          <i className="bi bi-bell fs-5"></i><br /><small>Notifikasi</small>
+        </a>
+        <a href="#" className="text-center text-gold text-decoration-none" onClick={handleAlert}>
+          <i className="bi bi-person fs-5"></i><br /><small>Saya</small>
+        </a>
+      </nav>
+    </div>
+  );
+};
+
+export default HomePage;
