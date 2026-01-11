@@ -1,0 +1,90 @@
+.game-page {
+  width: 100vw; height: 100vh;
+  background: #121212;
+  display: flex; justify-content: center; align-items: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+.game-card {
+  background: white; padding: 40px; border-radius: 40px;
+  text-align: center; width: 420px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+.logo { font-family: 'Playfair Display', serif; color: #bfa76a; letter-spacing: 2px; }
+
+.balance-pill {
+  background: #fdf8e9; border: 1px solid #bfa76a;
+  padding: 8px 20px; border-radius: 50px; color: #bfa76a; margin-bottom: 20px;
+}
+
+.wheel-container { position: relative; width: 340px; height: 340px; margin: auto; }
+
+/* THE POINTER PHYSICS */
+.wheel-arrow {
+  position: absolute; top: -18px; left: 50%;
+  transform: translateX(-50%) rotate(0deg);
+  transform-origin: 50% 0%; /* Pivots from the very top base */
+  font-size: 2.8rem; color: #bfa76a; z-index: 100;
+  /* Smoothly snaps back forward after a hit */
+  transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Sharp kick-back effect when a nail is detected */
+.snap-flick {
+  transform: translateX(-50%) rotate(-30deg);
+  transition: none; /* Instant kick, no delay */
+}
+
+.wheel-body {
+  width: 100%; height: 100%; border-radius: 50%;
+  position: relative; border: 10px solid #1a1a1a;
+  box-sizing: border-box;
+}
+
+.wheel-surface {
+  position: absolute; width: 100%; height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(
+    #bfa76a 0 18deg, #d4c4a1 18deg 36deg, #bfa76a 36deg 54deg, #d4c4a1 54deg 72deg,
+    #bfa76a 72deg 90deg, #d4c4a1 90deg 108deg, #bfa76a 108deg 126deg, #d4c4a1 126deg 144deg,
+    #bfa76a 144deg 162deg, #d4c4a1 162deg 180deg, #bfa76a 180deg 198deg, #d4c4a1 198deg 216deg,
+    #bfa76a 216deg 234deg, #d4c4a1 234deg 252deg, #bfa76a 252deg 270deg, #d4c4a1 270deg 288deg,
+    #bfa76a 288deg 306deg, #d4c4a1 306deg 324deg, #bfa76a 324deg 342deg, #d4c4a1 342deg 360deg
+  );
+}
+
+.wheel-nail {
+  position: absolute; top: 2px; left: 50%;
+  width: 8px; height: 8px; background: #222;
+  border-radius: 50%; transform-origin: 0 158px;
+  margin-left: -4px; z-index: 50;
+  box-shadow: inset -1px -1px 2px rgba(255,255,255,0.4);
+}
+
+.wheel-label {
+  position: absolute; width: 100%; height: 100%;
+  display: flex; justify-content: center;
+}
+
+.wheel-label span {
+  margin-top: 25px; color: white; font-weight: 800;
+  font-size: 0.5rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+.wheel-center {
+  position: absolute; top: 50%; left: 50%;
+  width: 24px; height: 24px; background: white;
+  border-radius: 50%; transform: translate(-50%, -50%);
+  border: 4px solid #1a1a1a; z-index: 60;
+}
+
+.spin-btn {
+  background: #bfa76a; color: white; border: none;
+  padding: 15px; width: 100%; border-radius: 15px;
+  font-weight: bold; cursor: pointer; margin-top: 25px;
+}
+
+.prize-area { height: 40px; margin-top: 20px; }
+.win { color: #27ae60; font-weight: 800; }
+.lose { color: #7f8c8d; }

@@ -6,6 +6,7 @@ import MainLayout from './layouts/MainLayout';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
+import GamePage from './pages/GamePage';
 import FashionPage from './pages/FashionPage';
 import BeautyPage from './pages/BeautyPage';
 import TechPage from './pages/TechPage';
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/home" element={<HomePage />} />
+          <Route path="/game" element={<GamePage />} />
           <Route path="/fashion" element={<FashionPage />} />
           <Route path="/beauty" element={<BeautyPage />} />
           <Route path="/tech" element={<TechPage />} />

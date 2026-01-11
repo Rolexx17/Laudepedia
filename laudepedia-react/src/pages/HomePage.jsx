@@ -2,6 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../css/Fashion.css';
 import { products } from '../data/products'
+import Navbar from '../components/Navbar';
+import BottomNav from '../components/BottomNav';
 
 
 
@@ -13,6 +15,8 @@ const HomePage = () => {
   };
 
   return (
+    <>
+    <Navbar />
     <div className="home-page" style={{ paddingBottom: '80px' }}>
 
 
@@ -22,7 +26,7 @@ const HomePage = () => {
         <div className="d-flex justify-content-start px-3 gap-4 flex-nowrap text-center">
 
           <Feature icon="stars" label="VIP" onClick={handleAlert} />
-          <Feature icon="controller" label="Games" onClick={handleAlert} />
+          <Feature icon="controller" label="Game" onClick={() => navigate('/game')} />
 
           <Feature icon="bag-heart" label="Fashion" onClick={() => navigate('/fashion')} />
           <Feature icon="magic" label="Beauty" onClick={() => navigate('/beauty')} />
@@ -81,6 +85,8 @@ const HomePage = () => {
       </section>
 
     </div>
+    <BottomNav />
+    </>
   );
 };
 
