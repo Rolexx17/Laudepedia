@@ -3,9 +3,19 @@ body {
     background-color: #fcfcfc;
     margin: 0;
     color: #202020;
-    font-size: 16px;
+}
+* {
+    box-sizing: border-box;
 }
 
+html, body {
+    width: 100%;
+    overflow-x: hidden; /* 🔥 KUNCI HILANGIN GAP */
+    margin: 0;
+    padding: 0;
+}
+
+/* ================= BACK BUTTON ================= */
 .back-btn {
     position: fixed;
     top: 1.5rem;
@@ -23,168 +33,124 @@ body {
     font-size: 2rem;
     cursor: pointer;
     z-index: 1000;
-    transition: all 0.3s ease;
 }
 
-.back-btn:hover {
-    background-color: #fff8dc;
-    transform: translateY(-2px);
-}
-
+/* ================= HEADER ================= */
 .lp-header {
     text-align: center;
     padding: 2.5rem 0;
     background: linear-gradient(90deg, #ffffff 0%, #fffde6 100%);
     color: #b8860b;
     font-weight: 600;
-    font-size: calc(1.5rem + 0.8vw);
     letter-spacing: 0.35rem;
     box-shadow: 0 0.2rem 0.8rem rgba(184, 134, 11, 0.15);
 }
+.item-image,
+.item-info {
+    flex: 1;
+    min-width: 0;
+}
 
+/* ================= CONTAINER ================= */
 .item-container {
-    width: 92vw;
-    max-width: 1300px;
-    margin: 4rem auto;
+    width: 100%;
+    padding: 3rem clamp(1.5rem, 5vw, 4rem);
+
     background-color: #ffffff;
     border-radius: 1rem;
     box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.06);
-    overflow: hidden;
-    padding: 3rem;
+
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     gap: 3rem;
-    transition: all 0.4s ease;
 }
 
+
+
+/* ================= IMAGE ================= */
 .item-image {
-    flex: 1 1 600px;
-    padding: 0;
-    margin: auto 0;
+    flex: 1;
     display: flex;
-    align-items: center;
     justify-content: center;
-    border-radius: 0.75rem;
-    transition: box-shadow 0.3s ease;
+    align-items: center;
 }
+
+.item-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
 
 .item-image img {
     width: 100%;
     max-width: 600px;
     height: auto;
-    object-fit: contain;
     border-radius: 0.75rem;
-    background-color: #ffffff;
     box-shadow: 0 1.2rem 3.5rem rgba(0, 0, 0, 0.15);
-    margin: 0 1rem;
-    transition: transform 0.5s ease-in-out, box-shadow 0.5s ease, filter 0.5s ease;
-    filter: saturate(1.05);
 }
 
-.item-image img:hover {
-    transform: scale(1.02);
-    box-shadow: 0 1.8rem 5rem rgba(0, 0, 0, 0.25);
-    filter: saturate(1.1);
-}
-
-.item-info {
-    flex: 1 1 350px;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 1.4rem;
-    text-align: left;
-}
+/* ================= INFO ================= */
 
 .item-title {
-    font-size: calc(1.8rem + 1.2vw);
-    color: #101010;
+    font-size: 3rem;
     font-weight: 600;
     line-height: 1.1;
-    margin-bottom: 0.5rem;
 }
 
 .item-price {
-    font-size: calc(1.3rem + 0.7vw);
+    font-size: 2rem;
     color: #b8860b;
     font-weight: 600;
     border-bottom: 2px solid #fff5d1;
-    padding-bottom: 1.2rem;
+    padding-bottom: 1rem;
 }
 
 .item-description {
     font-size: 1.1rem;
     line-height: 1.7;
-    color: #555555;
-    padding-top: 0.8rem;
+    color: #555;
 }
 
 .item-rating {
     font-size: 1.1rem;
     color: #b8860b;
-    padding-top: 1rem;
 }
 
 .item-rating span {
-    color: #777777;
-    font-size: 1rem;
+    color: #777;
 }
 
+/* ================= ACTION ================= */
 .item-action {
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    flex-wrap: wrap;
-    padding-top: 1.5rem;
-}
-
-.item-action label {
-    font-size: 1rem;
-    color: #333333;
-    font-weight: 500;
 }
 
 .item-action input {
-    width: 5vw;
-    min-width: 55px;
+    width: 60px;
     height: 3rem;
     text-align: center;
     border: 1px solid #dcdcdc;
     border-radius: 0.5rem;
-    font-size: 1.1rem;
-    transition: border-color 0.3s;
-}
-
-.item-action input:focus {
-    border-color: #b8860b;
-    outline: none;
 }
 
 .buy-btn {
     background: linear-gradient(90deg, #d4af37, #b8860b);
-    color: #ffffff;
+    color: white;
     border: none;
     border-radius: 0.75rem;
     padding: 1rem 3rem;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    box-shadow: 0 0.6rem 1.2rem rgba(184, 134, 11, 0.5);
 }
 
-.buy-btn:hover {
-    background: #b9972f;
-    transform: translateY(-0.25rem);
-    color: #101010;
-}
-
+/* ================= FOOTER ================= */
 .lp-footer {
     text-align: center;
-    background-color: #ffffff;
-    color: #999999;
+    color: #999;
     padding: 2rem 0;
-    box-shadow: 0 -0.1rem 0.5rem rgba(0, 0, 0, 0.03);
 }
