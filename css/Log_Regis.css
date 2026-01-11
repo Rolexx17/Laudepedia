@@ -1,0 +1,112 @@
+body {
+  background: linear-gradient(135deg, #ffffff 0%, #f9f6f1 100%);
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: #333;
+  margin: 0;
+}
+
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border-radius: 24px;
+  padding: 3rem 2.5rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  max-width: 420px;
+  width: 90%;
+  transition: all 0.4s ease;
+}
+
+.auth-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 50px rgba(192, 158, 90, 0.25);
+}
+
+.brand {
+  font-family: 'Playfair Display', serif;
+  color: #bfa76a;
+  font-size: 2.5rem;
+  letter-spacing: 1px;
+  margin-bottom: 0.3rem;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: #7c7c7c;
+  margin-bottom: 2rem;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-label {
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+  color: #4b4b4b;
+}
+
+.form-control {
+  border-radius: 14px;
+  border: 1px solid #e2dccb;
+  padding: 0.85rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #c2a45e;
+  box-shadow: 0 0 10px rgba(194, 164, 94, 0.25);
+}
+
+.btn-gold {
+  background-color: #c2a45e;
+  color: white;
+  border: none;
+  border-radius: 14px;
+  padding: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.btn-gold:hover {
+  background-color: #b19049;
+  box-shadow: 0 6px 18px rgba(193, 161, 88, 0.35);
+  transform: scale(1.03);
+}
+
+.switch-link {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.switch-link a {
+  color: #bfa76a;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.switch-link a:hover {
+  color: #a78b4b;
+  text-decoration: underline;
+}
+
+/* @media (max-width: 480px) {
+  .auth-container {
+    padding: 2.5rem 1.8rem;
+  }
+  .brand {
+    font-size: 2rem;
+  }
+} */

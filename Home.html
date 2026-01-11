@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laudepedia | Home</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/Home.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="bg-gold p-3 d-flex align-items-center justify-content-between">
+    <div class="input-group w-75">
+      <span class="input-group-text border-0 bg-white"><i class="bi bi-search text-gold"></i></span>
+      <input type="text" class="form-control border-0" placeholder="Cari di Laudepedia...">
+    </div>
+    <i class="bi bi-cart ms-3 text-white fs-4"  onclick="alert('Coming Soon!');return false;"></i>
+  </header>
+
+  <!-- Feature Icons -->
+  <section class="bg-light py-3 overflow-auto">
+    <div class="d-flex justify-content-start px-3 gap-4 flex-nowrap">
+      <a href="" class="item" onclick="alert('Coming Soon!');return false;">
+        <div class="text-center flex-shrink-0">
+          <div class="icon-circle bg-gold mb-1"><i class="bi bi-stars text-white fs-4"></i></div>
+          <p class="small mb-0">VIP</p>
+        </div>
+      </a>
+
+      <a href="#" class="item" onclick="alert('Coming Soon!');return false;">
+        <div class="text-center flex-shrink-0">
+          <div class="icon-circle bg-gold mb-1"><i class="bi bi-controller text-white fs-4"></i></div>
+          <p class="small mb-0">Games</p>
+        </div>
+      </a>
+
+      <a href="Fashion.html" class="item">
+        <div class="text-center flex-shrink-0">
+          <div class="icon-circle bg-gold mb-1"><i class="bi bi-bag-heart text-white fs-4"></i></div>
+          <p class="small mb-0">Fashion</p>
+        </div>
+      </a>
+
+      <a href="#" class="item" onclick="alert('Coming Soon!');return false;">
+        <div class="text-center flex-shrink-0">
+          <div class="icon-circle bg-gold mb-1"><i class="bi bi-brush text-white fs-4"></i></div>
+          <p class="small mb-0">Beauty</p>
+        </div>
+      </a>
+
+      <a href="#" class="item" onclick="alert('Coming Soon!');return false;">
+        <div class="text-center flex-shrink-0">
+          <div class="icon-circle bg-gold mb-1"><i class="bi bi-cpu text-white fs-4"></i></div>
+          <p class="small mb-0">Tech</p>
+        </div>
+      </a>
+
+      <a href="#" class="item" onclick="alert('Coming Soon!');return false;">
+        <div class="text-center flex-shrink-0">
+          <div class="icon-circle bg-gold mb-1"><i class="bi bi-grid text-white fs-4"></i></div>
+          <p class="small mb-0">More</p>
+        </div>
+      </a>
+      <a href="About Us.html" class="item ms-auto text-center">
+        <div class="text-center flex-shrink-0">
+          <p class="fs-4 mb-0">About Us</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Scrollable Banner -->
+  <section class="banner-scroll py-2">
+    <div class="d-flex overflow-auto px-3 gap-3">
+      <img src="resources/128453e1-1e18-4c8f-b631-713a198eec59.jpg" class="rounded-4 banner-img flex-shrink-0">
+      <img src="resources/16ac2a31-1777-4bb4-be25-b752342d9e8c.jpg" class="rounded-4 banner-img flex-shrink-0">
+      <img src="resources/832817ec-0a21-4b18-a15c-befa0921fe77.jpg" class="rounded-4 banner-img flex-shrink-0">
+      <img src="resources/9e819acf-3670-4ad3-b49b-563e272d022a.jpg" class="rounded-4 banner-img flex-shrink-0">
+      <img src="resources/7ab3d36d-b872-4ee4-8264-32bed5b6d568.jpg" class="rounded-4 banner-img flex-shrink-0">
+    </div>
+  </section>
+
+  <!-- LaudeLive Section -->
+  <section class="container my-3">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <h5 class="text-gold fw-semibold mb-0">LaudeVideo</h5>
+      <br><br><br><br>
+      <a href="#" class="text-decoration-none small text-gold" onclick="alert('Coming Soon!');return false;">See All →</a>
+    </div>
+    <div class="row g-2">
+      <div class="col-6">
+        <video src="resources/Oakley_-_Just_dropped_Oakley_Meta_Vanguard._These_new_Performance_AI_glasses_..._268NR0.mp4" class="w-100 rounded-3" controls poster="resources/live1.jpg"
+        autoplay muted loop></video>
+      </div>
+      <div class="col-6">
+        <video src="resources/New_Balance_-_Josh_Allen_Professional_QB1._JoshAllenQB_FBFpeG.mp4" class="w-100 rounded-3" controls poster="resources/live2.jpg"
+        autoplay muted loop></video>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Display -->
+  <section class="container my-3 pb-5">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <h5 class="text-gold fw-semibold mb-0">Produk Pilihan</h5>
+      <br><br><br><br>
+      <a href="#" class="text-decoration-none small text-gold" onclick="alert('Coming Soon!');return false;">See All →</a>
+    </div>
+
+    <div class="row row-cols-2 row-cols-md-4 g-3">
+      <div class="col">
+        <a href="B9.html">
+          <div class="product-card position-relative overflow-hidden rounded-4 shadow-sm">
+            <img src="resources/B9.jpg" class="w-100 product-img">
+            <div class="price-overlay">
+              <p class="mb-0 text-white fw-semibold">Rp 550.000</p>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a href="T2.html">
+          <div class="product-card position-relative overflow-hidden rounded-4 shadow-sm">
+            <img src="resources/T2.jpg" class="w-100 product-img">
+            <div class="price-overlay">
+              <p class="mb-0 text-white fw-semibold">Rp 180.000</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="B10.html">
+          <div class="product-card position-relative overflow-hidden rounded-4 shadow-sm">
+            <img src="resources/B10.jpg" class="w-100 product-img">
+            <div class="price-overlay">
+              <p class="mb-0 text-white fw-semibold">Rp 226.000</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="S1.html">
+          <div class="product-card position-relative overflow-hidden rounded-4 shadow-sm">
+            <img src="resources/S1.jpg" class="w-100 product-img">
+            <div class="price-overlay">
+              <p class="mb-0 text-white fw-semibold">Rp 350.000</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="B3.html">
+          <div class="product-card position-relative overflow-hidden rounded-4 shadow-sm">
+            <img src="resources/B3.jpg" class="w-100 product-img">
+            <div class="price-overlay">
+              <p class="mb-0 text-white fw-semibold">Rp 2.500.000</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="B2.html">
+          <div class="product-card position-relative overflow-hidden rounded-4 shadow-sm">
+            <img src="resources/B2.jpg" class="w-100 product-img">
+            <div class="price-overlay">
+              <p class="mb-0 text-white fw-semibold">Rp 950.000</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="B5.html">
+          <div class="product-card position-relative overflow-hidden rounded-4 shadow-sm">
+            <img src="resources/B5.jpg" class="w-100 product-img">
+            <div class="price-overlay">
+              <p class="mb-0 text-white fw-semibold">Rp 600.000</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="B7.html">
+          <div class="product-card position-relative overflow-hidden rounded-4 shadow-sm">
+            <img src="resources/B7.jpg" class="w-100 product-img">
+            <div class="price-overlay">
+              <p class="mb-0 text-white fw-semibold">Rp 500.000</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer Navbar -->
+  <nav class="bottom-nav d-flex justify-content-around align-items-center py-2 border-top">
+    <a href="#" class="text-center  text-decoration-none active">
+      <i class="bi bi-house-fill fs-5"></i><br><small>Beranda</small>
+    </a>
+    <a href="#" class="text-center text-gold text-decoration-none" onclick="alert('Coming Soon!');return false;">
+      <i class="bi bi-fire fs-5"></i><br><small>Trending</small>
+    </a>
+    <a href="#" class="text-center text-gold text-decoration-none" onclick="alert('Coming Soon!');return false;">
+      <i class="bi bi-camera-video fs-5"></i><br><small>Live</small>
+    </a>
+    <a href="#" class="text-center text-gold text-decoration-none" onclick="alert('Coming Soon!');return false;">
+      <i class="bi bi-bell fs-5"></i><br><small>Notifikasi</small>
+    </a>
+    <a href="Profile.html" class="text-center text-gold text-decoration-none">
+      <i class="bi bi-person fs-5"></i><br><small>Saya</small>
+    </a>
+  </nav>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

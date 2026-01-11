@@ -1,0 +1,103 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff;
+  color: #333;
+}
+
+.text-gold {
+  color: #bfa76a !important;
+}
+
+.btn-gold {
+  background-color: #bfa76a;
+  color: white;
+  border: none;
+}
+.btn-gold:hover {
+  background-color: #a48f5e;
+  color: white;
+}
+
+.btn-outline-gold {
+  border: 1px solid #bfa76a;
+  color: #bfa76a;
+}
+.btn-outline-gold:hover {
+  background-color: #bfa76a;
+  color: white;
+}
+
+.hero-section {
+  background: linear-gradient(to bottom, #fff, #f9f9f9);
+}
+
+.scroll-container::-webkit-scrollbar {
+  height: 6px;
+}
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: #bfa76a;
+  border-radius: 10px;
+}
+
+.product-card {
+  border: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.3s;
+}
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.store-card {
+  border: 1px solid #eee;
+  background-color: white;
+  font-weight: 600;
+  min-width: 160px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+.store-card:hover {
+  background-color: #bfa76a;
+  color: white;
+  transform: translateY(-4px);
+}
+
+.scroll-container .card {
+  width: 180px; 
+  flex: 0 0 auto;
+  margin-right: 16px;
+  border: none;
+  background-color: transparent;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+  text-align: center;
+  min-height: 160px; 
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 6px;
+  line-height: 1.3;
+  height: 36px; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; 
+  -webkit-box-orient: vertical;
+}
+
+.card-text.gold {
+  color: #b58d2c !important;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+a.item {
+  text-decoration: none;
+  color: black;
+}
