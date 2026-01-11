@@ -12,6 +12,8 @@ const FashionPage = () => {
     { id: 'b4', name: 'Dark Denim Jacket with Faux Fur Lining', price: 'Rp 1.800.000', img: '/resources/B4.jpg' },
     { id: 'b5', name: 'Street Graphic Black Long-Sleeve Tee', price: 'Rp 600.000', img: '/resources/B5.jpg' },
     { id: 'b6', name: 'Stüssy Cream Knit Logo Vest', price: 'Rp 1.400.000', img: '/resources/B6.jpg' },
+    { id: 'b7', name: 'Romantic Floral Cropped Top', price: 'Rp 500.000', img: '/resources/B7.jpg' },
+    { id: 'b8', name: 'Vintage White Lace Dress', price: 'Rp 1.700.000', img: '/resources/B8.jpg' },
   ];
 
   /* ================= STORES ================= */

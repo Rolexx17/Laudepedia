@@ -1,97 +1,129 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const FashionPage = () => {
+/* ================= REUSABLE PRODUCT CARD (KHUSUS TRENDING) ================= */
+const TrendingProductCard = ({ item, onClick }) => {
+  return (
+    <div
+      className="card me-3 flex-shrink-0"
+      style={{ width: '180px', cursor: 'pointer' }}
+      onClick={onClick}
+    >
+      {/* IMAGE WRAPPER FIX */}
+      <div
+        style={{
+          height: '180px',
+          overflow: 'hidden',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: '#fff'
+        }}
+      >
+        <img
+          src={item.img}
+          alt={item.name}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover'
+          }}
+        />
+      </div>
+
+      <div className="card-body text-center">
+        <h6 className="card-title small">{item.name}</h6>
+        <p className="fw-bold text-gold mb-0">{item.price}</p>
+      </div>
+    </div>
+  );
+};
+
+const BeautyPage = () => {
   const navigate = useNavigate();
 
-  /* ================= TRENDING ================= */
-  const trendingFashion = [
-    { id: 'b1', name: 'EDWIN Classic Faded Denim Jacket', price: 'Rp 1.200.000', img: '/resources/B1.jpg' },
-    { id: 'b2', name: 'Abstract Teal Oversized Knit Sweater', price: 'Rp 950.000', img: '/resources/B2.jpg' },
-    { id: 'b3', name: 'Virgil Abloh™ Black Varsity Jacket', price: 'Rp 2.500.000', img: '/resources/B3.jpg' },
-    { id: 'b4', name: 'Dark Denim Jacket with Faux Fur Lining', price: 'Rp 1.800.000', img: '/resources/B4.jpg' },
-    { id: 'b5', name: 'Street Graphic Black Long-Sleeve Tee', price: 'Rp 600.000', img: '/resources/B5.jpg' },
-    { id: 'b6', name: 'Stüssy Cream Knit Logo Vest', price: 'Rp 1.400.000', img: '/resources/B6.jpg' },
+  /* ================= TRENDING BEAUTY ================= */
+  const trendingBeauty = [
+    { id: 'y1', name: 'Dior Forever Skin Glow', price: 'Rp 950.000', img: '/resources/Y1.jpg' },
+    { id: 'y2', name: 'Chanel Rouge Allure Velvet', price: 'Rp 720.000', img: '/resources/Y2.jpg' },
+    { id: 'y3', name: 'SK-II Facial Treatment Essence', price: 'Rp 2.350.000', img: '/resources/Y3.jpg' },
+    { id: 'y4', name: 'Estée Lauder Advanced Night Repair', price: 'Rp 1.850.000', img: '/resources/Y4.jpg' },
+    { id: 'y5', name: 'Rare Beauty Soft Pinch Blush', price: 'Rp 420.000', img: '/resources/Y5.jpg' },
+    { id: 'y6', name: 'YSL Libre Eau de Parfum', price: 'Rp 1.750.000', img: '/resources/Y6.jpg' },
   ];
 
-  /* ================= STORES ================= */
-  const stores = [
-    'GAUDI', 'HUGO', 'LOONY', 'EXIT', 'MONOGRAM',
-    'NEWWAVE', 'LAUFE', 'PHOEBES', 'ZASTIN',
-    'CHOMA', 'SIXSEVEN', 'SILENE'
+  /* ================= BEAUTY BRANDS ================= */
+  const brands = [
+    'DIOR', 'CHANEL', 'YSL', 'RARE BEAUTY',
+    'SK-II', 'ESTÉE LAUDER', 'LANEIGE',
+    'MAC', 'FENTY BEAUTY', 'NARS'
   ];
 
-  /* ================= RECOMMENDATION ================= */
+  /* ================= RECOMMENDATION (TIDAK DIUBAH) ================= */
   const recommendations = [
-    { id: 'b9', name: 'White Puff-Sleeve Ribbon Mini Dress', price: 'Rp 550.000', img: '/resources/B9.jpg' },
-    { id: 'b10', name: 'Gothic Cross Halter Crop', price: 'Rp 226.000', img: '/resources/B10.jpg' },
-    { id: 'c1', name: 'Pinstripe Tailored Shorts', price: 'Rp 159.000', img: '/resources/C1.jpg' },
-    { id: 'c2', name: 'Black Denim Graphic Shorts', price: 'Rp 115.000', img: '/resources/C2.jpg' },
-    { id: 'c3', name: 'Classic Blue Denim Mini Skirt', price: 'Rp 96.000', img: '/resources/C3.jpg' },
-    { id: 's1', name: 'Double Monk Strap Shoes', price: 'Rp 350.000', img: '/resources/S1.jpg' },
-    { id: 't1', name: 'Urban Leather Shoulder Bag', price: 'Rp 125.000', img: '/resources/T1.jpg' },
-    { id: 't2', name: 'Coach Vintage Handbag', price: 'Rp 180.000', img: '/resources/T2.jpg' },
+    { id: 'y7', name: 'Laneige Lip Sleeping Mask', price: 'Rp 320.000', img: '/resources/Y7.jpg' },
+    { id: 'y8', name: 'MAC Studio Fix Powder Plus', price: 'Rp 580.000', img: '/resources/Y8.jpg' },
+    { id: 'y9', name: 'Fenty Beauty Gloss Bomb', price: 'Rp 390.000', img: '/resources/Y9.jpg' },
+    { id: 'y10', name: 'NARS Radiant Creamy Concealer', price: 'Rp 520.000', img: '/resources/Y10.jpg' },
+    { id: 'y11', name: 'La Roche-Posay Effaclar Duo+', price: 'Rp 450.000', img: '/resources/Y11.jpg' },
+    { id: 'y12', name: 'The Ordinary Niacinamide 10%', price: 'Rp 180.000', img: '/resources/Y12.jpg' },
+    { id: 'y13', name: 'Drunk Elephant Protini Cream', price: 'Rp 1.250.000', img: '/resources/Y13.jpg' },
+    { id: 'y14', name: 'Charlotte Tilbury Airbrush Powder', price: 'Rp 750.000', img: '/resources/Y14.jpg' },
   ];
 
   return (
-    <div className="fashion-page">
+    <div className="beauty-page">
 
       {/* ================= HERO ================= */}
       <section className="hero-section text-center py-5">
         <div className="container">
-          <h1 className="fw-bold text-gold">Fashion Collection</h1>
-          <p className="text-muted">Stay trendy this season with our monthly picks</p>
+          <h1 className="fw-bold text-gold">Beauty Collection</h1>
+          <p className="text-muted">
+            Discover premium beauty & skincare essentials
+          </p>
         </div>
       </section>
 
-      {/* ================= TRENDING ================= */}
+      {/* ================= TRENDING (FIXED) ================= */}
       <section className="trending py-5 bg-light">
         <div className="container">
-          <h2 className="fw-semibold text-gold mb-3">Trending Fashion</h2>
+          <h2 className="fw-semibold text-gold mb-3">Trending Beauty</h2>
 
           <div className="d-flex flex-nowrap overflow-auto pb-3">
-            {trendingFashion.map((item) => (
-              <div
+            {trendingBeauty.map((item) => (
+              <TrendingProductCard
                 key={item.id}
-                className="card me-3 flex-shrink-0"
-                style={{ width: '180px', cursor: 'pointer' }}
+                item={item}
                 onClick={() => navigate(`/product/${item.id}`)}
-              >
-                <img src={item.img} className="card-img-top" alt={item.name} />
-                <div className="card-body">
-                  <h6 className="card-title">{item.name}</h6>
-                  <p className="fw-bold text-gold">{item.price}</p>
-                </div>
-              </div>
+              />
             ))}
           </div>
-
         </div>
       </section>
 
-      {/* ================= STORES ================= */}
-      <section className="stores py-5">
+      {/* ================= BRANDS ================= */}
+      <section className="brands py-5">
         <div className="container">
           <div className="d-flex justify-content-between align-items-center mb-3">
-            <h2 className="fw-semibold text-gold mb-0">Popular Stores</h2>
+            <h2 className="fw-semibold text-gold mb-0">Top Beauty Brands</h2>
             <span className="text-gold small">See All →</span>
           </div>
 
           <div className="d-flex flex-nowrap overflow-auto pb-3">
-            {stores.map((store, index) => (
+            {brands.map((brand, index) => (
               <div
                 key={index}
                 className="text-center p-4 me-3 rounded bg-light flex-shrink-0"
                 style={{ minWidth: '120px' }}
               >
-                {store}
+                {brand}
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ================= RECOMMENDATION ================= */}
+      {/* ================= RECOMMENDATION (ASLI, TIDAK DIUBAH) ================= */}
       <section className="recommendations py-5 bg-light">
         <div className="container">
           <h2 className="text-center mb-4 fw-semibold text-gold">
@@ -122,7 +154,7 @@ const FashionPage = () => {
       {/* ================= FOOTER ================= */}
       <footer className="text-center py-4 bg-white border-top">
         <p className="mb-0 text-muted">
-          © 2025 Laudepedia Fashion. All Rights Reserved.
+          © 2025 Laudepedia Beauty. All Rights Reserved.
         </p>
       </footer>
 
@@ -130,4 +162,4 @@ const FashionPage = () => {
   );
 };
 
-export default FashionPage;
+export default BeautyPage;
