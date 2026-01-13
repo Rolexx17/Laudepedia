@@ -117,7 +117,6 @@ const Profile = () => {
       {/* PROFILE CARD */}
       <div className="profile-card">
         <img 
-          onClick={() => alert('Coming Soon!')} 
           src="https://cdn-icons-png.flaticon.com/512/847/847969.png" 
           alt="Profile" 
           className="profile-avatar"
