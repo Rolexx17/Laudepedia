@@ -19,7 +19,7 @@ const Navbar = () => {
       </h4>
 
       {/* SEARCH */}
-      <div className="input-group w-50 shadow-sm">
+      {/* <div className="input-group w-50 shadow-sm">
         <span className="input-group-text border-0 bg-white">
           <i className="bi bi-search" style={{ color: '#bfa76a' }}></i>
         </span>
@@ -28,7 +28,7 @@ const Navbar = () => {
           className="form-control border-0"
           placeholder="Cari di Laudepedia..."
         />
-      </div>
+      </div> */}
 
       {/* RIGHT MENU */}
       <div className="d-flex align-items-center gap-3">

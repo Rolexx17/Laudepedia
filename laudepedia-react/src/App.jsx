@@ -6,6 +6,7 @@ import MainLayout from './layouts/MainLayout';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
+import ProfilePage from './pages/ProfilePage';
 import GamePage from './pages/GamePage';
 import FashionPage from './pages/FashionPage';
 import BeautyPage from './pages/BeautyPage';
@@ -21,6 +22,7 @@ function App() {
           <Route path="/" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/home" element={<HomePage />} />
+          <Route path="/profile" element={<ProfilePage />} />
           <Route path="/game" element={<GamePage />} />
           <Route path="/fashion" element={<FashionPage />} />
           <Route path="/beauty" element={<BeautyPage />} />
