@@ -15,11 +15,8 @@ import BeautyPage from './pages/BeautyPage';
 import TechPage from './pages/TechPage';
 import ProductDetail from './pages/ProductDetail';
 import AboutUsPage from './pages/AboutUsPage';
+import ViewCart from './pages/ViewCart'; // Kita gunakan ini sebagai halaman keranjang
 
-/**
- * 1. PROTECTED ROUTE:
- * Mencegah akses ke halaman internal (Home, Profile, dll) jika belum login.
- */
 const ProtectedRoute = ({ children }) => {
   const currentUser = localStorage.getItem('currentUser');
   if (!currentUser) {
@@ -28,11 +25,6 @@ const ProtectedRoute = ({ children }) => {
   return children;
 };
 
-/**
- * 2. PUBLIC ROUTE:
- * Mencegah user yang SUDAH LOGIN untuk kembali ke halaman Register/Login.
- * Jika mereka mencoba ke sana, akan otomatis dilempar ke /home.
- */
 const PublicRoute = ({ children }) => {
   const currentUser = localStorage.getItem('currentUser');
   if (currentUser) {
@@ -47,7 +39,7 @@ function App() {
       <Routes>
         <Route element={<MainLayout />}>
           
-          {/* === ROUTE PUBLIK KHUSUS (Gak bisa diakses kalau sudah login) === */}
+          {/* === PUBLIC ROUTES === */}
           <Route path="/" element={
             <PublicRoute>
               <RegisterPage />
@@ -58,11 +50,9 @@ function App() {
               <LoginPage />
             </PublicRoute>
           } />
-
-          {/* === ROUTE UMUM === */}
           <Route path="/about" element={<AboutUsPage />} />
 
-          {/* === ROUTE TERPROTEKSI (Harus login dulu) === */}
+          {/* === PROTECTED ROUTES === */}
           <Route path="/home" element={
             <ProtectedRoute>
               <HomePage />
@@ -99,9 +89,17 @@ function App() {
             </ProtectedRoute>
           } />
           
+          {/* Detail Produk - Cukup satu rute saja */}
           <Route path="/product/:id" element={
             <ProtectedRoute>
               <ProductDetail />
+            </ProtectedRoute>
+          } />
+
+          {/* HALAMAN KERANJANG - Pastikan path ini sesuai dengan navigate('/cart') di ProductDetail */}
+          <Route path="/cart" element={
+            <ProtectedRoute>
+              <ViewCart />
             </ProtectedRoute>
           } />
 
