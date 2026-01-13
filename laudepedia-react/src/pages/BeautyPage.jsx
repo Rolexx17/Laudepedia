@@ -1,5 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../components/Navbar';
+import BottomNav from '../components/BottomNav';
 
 /* ================= REUSABLE PRODUCT CARD (KHUSUS TRENDING) ================= */
 const TrendingProductCard = ({ item, onClick }) => {
@@ -72,6 +74,8 @@ const BeautyPage = () => {
   ];
 
   return (
+    <>
+    <Navbar />
     <div className="beauty-page">
 
       {/* ================= HERO ================= */}
@@ -159,6 +163,8 @@ const BeautyPage = () => {
       </footer>
 
     </div>
+    <BottomNav />
+    </>
   );
 };
 
