@@ -5,6 +5,16 @@ import BottomNav from '../components/BottomNav';
 import { getProcessedBeauty, animationSettings } from '../js/beauty';
 import '../css/Beauty.css';
 
+/**
+ * BEAUTY CARD COMPONENT
+ * Komponen reusable untuk menampilkan ringkasan informasi produk kecantikan.
+ * * Props:
+ * - item: Object - Data produk { id, name, price, img }.
+ * - onClick: Function - Handler untuk navigasi ke detail produk.
+ * - index: Number - Urutan item untuk menentukan delay animasi.
+ * - isTrending: Boolean - Flag untuk mengubah layout menjadi horizontal scroll.
+ */
+
 const BeautyCard = ({ item, onClick, index, isTrending = false }) => (
   <div 
     className={`${isTrending ? 'me-3 flex-shrink-0' : 'col-6 col-md-3 mb-4'} reveal-item`} 

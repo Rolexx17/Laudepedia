@@ -5,6 +5,15 @@ import BottomNav from '../components/BottomNav';
 import { filterAndSortProducts, getStaggerDelay } from '../js/fashion';
 import '../css/Fashion.css';
 
+/**
+ * SEARCH RESULT CARD COMPONENT
+ * Komponen kartu produk individual yang digunakan dalam grid hasil pencarian dan rekomendasi.
+ * * Props:
+ * - item: Object - Data produk { id, name, price, img }.
+ * - onClick: Function - Navigasi ke halaman detail produk.
+ * - index: Number - Digunakan untuk menghitung delay animasi stagger.
+ */
+
 const SearchResultCard = ({ item, onClick, index }) => {
   return (
     <div className="col-6 col-md-3 mb-4 reveal-item" style={getStaggerDelay(index)}>
