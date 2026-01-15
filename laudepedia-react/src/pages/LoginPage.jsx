@@ -2,6 +2,20 @@ import React, { useState } from 'react';
 import { loginUser } from '../js/authService';
 import '../css/Log_Regis.css';
 
+/**
+ * LOGIN PAGE COMPONENT
+ * Halaman antarmuka untuk autentikasi pengguna agar dapat masuk ke sistem.
+ * * * State (React Hooks):
+ * - credentials: Object - Menyimpan data input form { email: string, password: string }.
+ * - error: String - Menyimpan pesan feedback jika login gagal (validasi visual).
+ * * * Functions (Event Handlers):
+ * - handleChange: Function(e) - Mengambil value dari input field dan memperbarui state credentials secara real-time.
+ * - handleLogin: Function(e) - Menangani submit form, memanggil service autentikasi, dan mengarahkan navigasi.
+ * * * Variables & Logic:
+ * - result: Object - Variabel lokal penampung respon dari `loginUser` ({ success: boolean, message: string }).
+ * - window.location.href: String API - Digunakan untuk navigasi paksa ke halaman '/home' saat sukses.
+ */
+
 const Login = () => {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
