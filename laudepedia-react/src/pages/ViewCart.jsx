@@ -189,7 +189,7 @@ const ViewCart = () => {
                 {isCheckout && (
                   <div className="checkout-form">
                     <div className="form-group">
-                      <label>Adress</label>
+                      <label>Address</label>
                       <textarea rows="2" value={formData.address} onChange={(e) => setFormData({...formData, address: e.target.value})} />
                     </div>
                     <div className="form-group">
