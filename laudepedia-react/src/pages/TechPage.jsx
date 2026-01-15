@@ -6,6 +6,15 @@ import BottomNav from '../components/BottomNav';
 import { useTechLogic } from '../js/tech'; // Import logic
 import '../css/Tech.css'; // Import animasi
 
+/**
+ * SEARCH RESULT CARD COMPONENT
+ * Komponen kartu produk untuk menampilkan hasil pencarian atau daftar produk teknologi.
+ * * Props:
+ * - item: Object - Objek produk yang berisi id, name, price, dan image.
+ * - onClick: Function - Handler untuk menangani navigasi saat kartu diklik.
+ * - index: Number - Indeks urutan untuk mengatur delay animasi stagger.
+ */
+
 const SearchResultCard = ({ item, onClick, index }) => {
   return (
     <div className="col-6 col-md-3 mb-4 animate-card" style={{ animationDelay: `${index * 0.1}s` }}>

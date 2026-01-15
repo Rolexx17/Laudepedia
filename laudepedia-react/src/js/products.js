@@ -1,3 +1,18 @@
+/**
+ * PRODUCTS DATA CONSTANT
+ * Kumpulan data statis produk yang digunakan di seluruh aplikasi (Fashion, Tech, Beauty).
+ * Data ini diekspor untuk digunakan oleh komponen ProductList, DetailProduct, dan Search.
+ * * * Data Structure (Object inside Array):
+ * - id: String - Unique identifier untuk setiap produk (contoh: 'b1', 'z1').
+ * - category: String - Kategori produk ('fashion', 'tech', 'beauty').
+ * - name: String - Nama lengkap produk.
+ * - price: Number - Harga produk dalam mata uang Rupiah (IDR).
+ * - image: String - Path relatif menuju file gambar di folder public/resources.
+ * - rating: Number - Skor penilaian produk (skala 0 - 5.0).
+ * - reviews: Number - Jumlah total ulasan dari pembeli.
+ * - description: String - Penjelasan detail mengenai fitur dan spesifikasi produk.
+ */
+
 export const products = [
   // ================= FASHION =================
   {
