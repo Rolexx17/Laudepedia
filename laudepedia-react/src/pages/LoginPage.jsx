@@ -50,7 +50,7 @@ const Login = () => {
           </div>
           <div className="input-field">
             <label htmlFor="password" className="form-label">Password</label>
-            <input type="password" id="password" className="form-control" placeholder="••••••••" value={credentials.password} onChange={handleChange} required />
+            <input type="password" id="password" className="form-control" placeholder="enter your password" value={credentials.password} onChange={handleChange} required />
           </div>
           <button type="submit" className="btn btn-gold w-100 mt-2">Login</button>
         </form>
