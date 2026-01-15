@@ -21,9 +21,9 @@ const Game = () => {
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
   const [balance, setBalance] = useState(() => {
-    if (!currentUser) return 100;
+    if (!currentUser) return 10000000;
     const savedBalance = localStorage.getItem(`balance_${currentUser.email}`);
-    return savedBalance !== null ? parseInt(savedBalance, 10) : 100;
+    return savedBalance !== null ? parseInt(savedBalance, 10) : 10000000;
   });
 
   const [spinning, setSpinning] = useState(false);
@@ -35,16 +35,16 @@ const Game = () => {
   const lastNailRef = useRef(0);
 
   const options = [
-    { label: '500 Coins', value: 50000 }, { label: '5 Coins', value: 500 },
-    { label: '50 Coins', value: 5000 }, { label: '0', value: 0 },
-    { label: '100 Coins', value: 10000 }, { label: '10 Coins', value: 1000 },
-    { label: '20 Coins', value: 2000 }, { label: '2 Coins', value: 200 },
-    { label: '250 Coins', value: 25000 }, { label: '0', value: 0 },
-    { label: '75 Coins', value: 7500 }, { label: '5 Coins', value: 500 },
-    { label: '150 Coins', value: 15000 }, { label: '10 Coins', value: 1000 },
-    { label: '20 Coins', value: 2000 }, { label: '0', value: 0 },
-    { label: '300 Coins', value: 30000 }, { label: '5 Coins', value: 500 },
-    { label: '40 Coins', value: 4000 }, { label: 'Lucky 7', value: 7700 },
+    { label: '500k', value: 500000 }, { label: '5k', value: 5000 },
+    { label: '50k', value: 50000 }, { label: '0', value: 0 },
+    { label: '100k', value: 100000 }, { label: '10k', value: 10000 },
+    { label: '20k', value: 20000 }, { label: '2k', value: 2000 },
+    { label: '250k', value: 250000 }, { label: '0', value: 0 },
+    { label: '75k', value: 75000 }, { label: '5k', value: 5000 },
+    { label: '150k', value: 150000 }, { label: '10k', value: 10000 },
+    { label: '20k', value: 20000 }, { label: '0', value: 0 },
+    { label: '300k', value: 300000 }, { label: '5k', value: 5000 },
+    { label: '40k', value: 40000 }, { label: 'Lucky 7', value: 77777 },
   ];
 
   useEffect(() => {
