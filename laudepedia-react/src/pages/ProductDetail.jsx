@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { products } from '../data/products';
+import { products } from '../js/products';
+import { addToCartLogic } from '../js/cart';
 import Navbar from '../components/Navbar';
 import BottomNav from '../components/BottomNav';
 import '../css/Item.css';
@@ -10,6 +11,8 @@ const ProductDetail = () => {
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
   const [isAdded, setIsAdded] = useState(false);
+  const [showRedirectModal, setShowRedirectModal] = useState(false);
+  const [statusMsg, setStatusMsg] = useState('');
 
   const product = products.find(item => item.id === id);
 
@@ -20,17 +23,17 @@ const ProductDetail = () => {
   if (!product) return <div style={{paddingTop: '100px', textAlign: 'center'}}>Produk Tidak Ditemukan</div>;
 
   const handleAddToCart = () => {
-    const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
-    const existingItemIndex = existingCart.findIndex(item => item.id === product.id);
-    if (existingItemIndex > -1) {
-      existingCart[existingItemIndex].qty += parseInt(quantity);
-    } else {
-      existingCart.push({ ...product, qty: parseInt(quantity) });
-    }
-    localStorage.setItem('cart', JSON.stringify(existingCart));
+    addToCartLogic(product, quantity); // Menggunakan fungsi dari file JS terpisah
+    
     setIsAdded(true);
-    setTimeout(() => setIsAdded(false), 2000);
-    if (window.confirm("Berhasil! Lihat keranjang sekarang?")) navigate('/cart');
+    setStatusMsg('Berhasil ditambahkan ke keranjang!');
+    
+    setTimeout(() => {
+      setIsAdded(false);
+      setShowRedirectModal(true);
+    }, 800);
+
+    setTimeout(() => setStatusMsg(''), 4000);
   };
 
   return (
@@ -38,6 +41,15 @@ const ProductDetail = () => {
       <Navbar />
 
       <main className="main-content-scrollable">
+        {statusMsg && (
+          <div className="status-banner-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '10px'}}>
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            {statusMsg}
+          </div>
+        )}
+
         <button className="back-btn-fixed" onClick={() => navigate(-1)}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="15 18 9 12 15 6"></polyline>
@@ -47,7 +59,7 @@ const ProductDetail = () => {
 
         <div className="detail-grid">
           <section className="image-panel">
-            <div className="image-wrapper-card">
+            <div className="image-wrapper-card" style={{position: 'relative'}}>
               <img src={product.image} alt={product.name} />
               {product.rating >= 4.8 && <span className="exclusive-badge">PREMIUM</span>}
             </div>
@@ -92,6 +104,20 @@ const ProductDetail = () => {
           </section>
         </div>
       </main>
+
+      {showRedirectModal && (
+        <div className="modal-overlay-item">
+          <div className="modal-content-item">
+            <div className="success-icon-circle">✓</div>
+            <h3 style={{color: '#111'}}>Berhasil Ditambahkan!</h3>
+            <p>Produk telah masuk ke keranjang belanja Anda.</p>
+            <div className="modal-actions-item">
+              <button className="btn-stay" onClick={() => setShowRedirectModal(false)}>Lanjut Belanja</button>
+              <button className="btn-go-cart" onClick={() => navigate('/cart')}>Lihat Keranjang</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <footer className="item-footer">
         <p>© 2026 Laudepedia — Elegance in Every Choice.</p>

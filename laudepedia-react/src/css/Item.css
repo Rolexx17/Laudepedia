@@ -187,3 +187,63 @@
     .detail-grid { grid-template-columns: 1fr; }
     .back-btn-fixed { top: 85px; left: 20px; }
 }
+
+
+/* Efek Hover Tombol Back */
+.back-btn-fixed:hover {
+    background: #111;
+    color: #fff;
+    transform: translateX(-5px);
+    border-color: #111;
+}
+
+.back-btn-fixed:hover svg {
+    stroke: #fff;
+}
+
+/* Efek Hover Gambar Produk */
+.image-wrapper-card:hover img {
+    transform: scale(1.08);
+}
+
+/* Efek Hover Tombol Quantity */
+.qty-btn:hover {
+    background: #e0e0e0;
+    transform: scale(1.05);
+}
+
+.qty-btn:active {
+    transform: scale(0.95);
+}
+
+/* Efek Hover Tombol Add to Cart */
+.btn-add-cart:not(.success):hover {
+    background: #333;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btn-add-cart:active {
+    transform: translateY(-1px);
+}
+
+/* Efek Hover Tombol Modal */
+.btn-stay:hover {
+    background: #eeeeee;
+    border-color: #bbb;
+}
+
+.btn-go-cart:hover {
+    background: #333;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Transisi Halus untuk Semua Elemen Interaktif */
+.back-btn-fixed, 
+.qty-btn, 
+.btn-add-cart, 
+.btn-stay, 
+.btn-go-cart {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../css/Home.css';
-import { products } from '../data/products'
+import { products } from '../js/products'
 import Navbar from '../components/Navbar';
 import BottomNav from '../components/BottomNav';
 
@@ -21,12 +21,10 @@ const HomePage = () => {
         {/* 2. FEATURE ICONS */}
         <section className="bg-light py-3 border-bottom overflow-auto">
           <div className="d-flex justify-content-start px-3 gap-4 flex-nowrap text-center">
-            <Feature icon="stars" label="VIP" onClick={handleAlert} />
             <Feature icon="controller" label="Game" onClick={() => navigate('/game')} />
             <Feature icon="bag-heart" label="Fashion" onClick={() => navigate('/fashion')} />
             <Feature icon="magic" label="Beauty" onClick={() => navigate('/beauty')} />
             <Feature icon="cpu" label="Tech" onClick={() => navigate('/tech')} />
-            <Feature icon="grid" label="More" onClick={handleAlert} />
           </div>
         </section>
 

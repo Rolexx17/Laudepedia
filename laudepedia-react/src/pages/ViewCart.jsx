@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import BottomNav from '../components/BottomNav';
+import { 
+  calculateShipping, 
+  saveTransactionToHistory, 
+  updateUserBalance 
+} from '../js/cartService';
 import '../css/Cart.css';
 
 const ViewCart = () => {
@@ -10,6 +15,10 @@ const ViewCart = () => {
   const [isCheckout, setIsCheckout] = useState(false);
   const [balance, setBalance] = useState(0);
   const [currentUser, setCurrentUser] = useState(null);
+  
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [statusMsg, setStatusMsg] = useState({ type: '', text: '' });
+  const [pendingAction, setPendingAction] = useState(null); 
   
   const [formData, setFormData] = useState({
     address: '',
@@ -29,6 +38,14 @@ const ViewCart = () => {
     }
   }, []);
 
+  const showFeedback = (type, text) => {
+    setStatusMsg({ type, text });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (type === 'success') {
+      setTimeout(() => setStatusMsg({ type: '', text: '' }), 3000);
+    }
+  };
+
   const updateQty = (id, delta) => {
     const updated = cartItems.map(item => 
       String(item.id) === String(id) 
@@ -39,59 +56,59 @@ const ViewCart = () => {
     localStorage.setItem('cart', JSON.stringify(updated));
   };
 
-  const remove = (id) => {
-    if (window.confirm("Hapus item ini?")) {
-      const filtered = cartItems.filter(item => String(item.id) !== String(id));
-      setCartItems(filtered);
-      localStorage.setItem('cart', JSON.stringify(filtered));
-      if (filtered.length === 0) setIsCheckout(false);
-    }
-  };
+  const confirmRemove = (id) => setPendingAction({ type: 'SINGLE', id });
+  const confirmRemoveAll = () => setPendingAction({ type: 'ALL' });
 
-  const removeAll = () => {
-    if (window.confirm("Kosongkan semua isi keranjang?")) {
-      setCartItems([]);
+  const executeDelete = () => {
+    let updatedItems = [];
+    if (pendingAction.type === 'SINGLE') {
+      updatedItems = cartItems.filter(item => String(item.id) !== String(pendingAction.id));
+      localStorage.setItem('cart', JSON.stringify(updatedItems));
+    } else {
       localStorage.removeItem('cart');
-      setIsCheckout(false);
     }
+    
+    setCartItems(updatedItems);
+    if (updatedItems.length === 0) setIsCheckout(false);
+    setPendingAction(null);
+    showFeedback('success', 'Berhasil dihapus dari keranjang');
   };
 
   const subtotal = cartItems.reduce((acc, item) => acc + (item.price * item.qty), 0);
-  const shippingCost = isCheckout ? { jne: 15000, jnt: 18000, sicepat: 20000, instant: 50000 }[formData.courier] || 0 : 0;
+  const shippingCost = isCheckout ? calculateShipping(formData.courier) : 0;
   const grandTotal = subtotal + shippingCost;
 
-  const handlePayment = () => {
-    if (!formData.address) return alert("Alamat wajib diisi!");
-    if (balance < grandTotal) return;
-
-    const confirmPay = window.confirm(
-      `Konfirmasi Pembayaran\n\nTotal: Rp ${grandTotal.toLocaleString('id-ID')}\nSaldo Anda: Rp ${balance.toLocaleString('id-ID')}\n\nLanjutkan pemotongan saldo?`
-    );
-
-    if (confirmPay) {
-      const newBalance = balance - grandTotal;
-      
-      // 1. Update Saldo
-      localStorage.setItem(`balance_${currentUser.email}`, newBalance);
-
-      // 2. Simpan ke History (Konek ke HistoryPage.jsx)
-      const historyKey = `history_${currentUser.email}`;
-      const existingHistory = JSON.parse(localStorage.getItem(historyKey)) || [];
-      const newTransaction = {
-        id: "TRX-" + Date.now(),
-        date: new Date().toLocaleString('id-ID'),
-        items: [...cartItems],
-        total: grandTotal,
-        address: formData.address,
-        courier: formData.courier.toUpperCase()
-      };
-      localStorage.setItem(historyKey, JSON.stringify([newTransaction, ...existingHistory]));
-
-      // 3. Bersihkan Keranjang & Redirect
-      alert("Pembayaran Berhasil!");
-      localStorage.removeItem('cart');
-      navigate('/history'); 
+  const handleOpenPaymentModal = () => {
+    if (!formData.address) {
+      showFeedback('error', 'Alamat pengiriman wajib diisi sebelum membayar!');
+      return;
     }
+    if (balance < grandTotal) return;
+    setShowConfirmModal(true);
+  };
+
+  const processPayment = () => {
+    const newBalance = balance - grandTotal;
+    
+    // Gunakan fungsi dari cartService.js
+    updateUserBalance(currentUser.email, newBalance);
+    
+    const newTransaction = {
+      id: "TRX-" + Date.now(),
+      date: new Date().toLocaleString('id-ID'),
+      items: [...cartItems],
+      total: grandTotal,
+      address: formData.address,
+      courier: formData.courier.toUpperCase()
+    };
+    
+    saveTransactionToHistory(currentUser.email, newTransaction);
+
+    setShowConfirmModal(false);
+    localStorage.removeItem('cart');
+    
+    showFeedback('success', 'Pembayaran Berhasil! Mengalihkan ke riwayat...');
+    setTimeout(() => navigate('/history'), 2000);
   };
 
   return (
@@ -99,10 +116,16 @@ const ViewCart = () => {
       <Navbar />
       <div className="cart-page-wrapper">
         <div className="cart-container">
+          {statusMsg.text && (
+            <div className={`onpage-alert ${statusMsg.type}`}>
+              {statusMsg.text}
+            </div>
+          )}
+
           <div className="cart-header-row">
             <h1 className="cart-header-title">Shopping Bag</h1>
             {cartItems.length > 0 && (
-              <button className="btn-remove-all" onClick={removeAll}>Clear All Bag</button>
+              <button className="btn-remove-all" onClick={confirmRemoveAll}>Clear All Bag</button>
             )}
           </div>
           
@@ -116,7 +139,7 @@ const ViewCart = () => {
               <div className="cart-items-panel">
                 {cartItems.map(item => (
                   <div className="cart-card" key={item.id}>
-                    <button className="btn-remove" onClick={() => remove(item.id)}>&times;</button>
+                    <button className="btn-remove" onClick={() => confirmRemove(item.id)}>&times;</button>
                     <img src={item.image} alt={item.name} />
                     <div className="cart-card-info">
                       <span className="cart-card-name">{item.name}</span>
@@ -166,7 +189,6 @@ const ViewCart = () => {
                   <span>Rp {grandTotal.toLocaleString('id-ID')}</span>
                 </div>
 
-                {/* Pesan Error Saldo dalam Page */}
                 {isCheckout && balance < grandTotal && (
                   <div className="balance-error-msg">
                     Saldo tidak mencukupi untuk transaksi ini.
@@ -179,12 +201,9 @@ const ViewCart = () => {
                   <>
                     <button 
                       className="btn-checkout confirm" 
-                      onClick={handlePayment}
+                      onClick={handleOpenPaymentModal}
                       disabled={balance < grandTotal}
-                      style={{ 
-                        opacity: balance < grandTotal ? 0.5 : 1, 
-                        cursor: balance < grandTotal ? 'not-allowed' : 'pointer' 
-                      }}
+                      style={{ opacity: balance < grandTotal ? 0.5 : 1, cursor: balance < grandTotal ? 'not-allowed' : 'pointer' }}
                     >
                       Bayar Sekarang
                     </button>
@@ -196,6 +215,37 @@ const ViewCart = () => {
           )}
         </div>
       </div>
+
+      {showConfirmModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3 style={{fontFamily: 'Playfair Display'}}>Konfirmasi Pembayaran</h3>
+            <p>Lanjutkan pemotongan saldo untuk pesanan ini?</p>
+            <div className="modal-details">
+              <div className="modal-line"><span>Total Bayar:</span> <strong>Rp {grandTotal.toLocaleString('id-ID')}</strong></div>
+              <div className="modal-line"><span>Saldo Sisa:</span> <span>Rp {(balance - grandTotal).toLocaleString('id-ID')}</span></div>
+            </div>
+            <div className="modal-actions">
+              <button className="btn-modal-cancel" onClick={() => setShowConfirmModal(false)}>Batal</button>
+              <button className="btn-modal-confirm" onClick={processPayment}>Ya, Bayar</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {pendingAction && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3 style={{fontFamily: 'Playfair Display'}}>Hapus Item?</h3>
+            <p>{pendingAction.type === 'ALL' ? 'Apakah Anda yakin ingin mengosongkan seluruh keranjang?' : 'Hapus item ini dari daftar belanja Anda?'}</p>
+            <div className="modal-actions">
+              <button className="btn-modal-cancel" onClick={() => setPendingAction(null)}>Batal</button>
+              <button className="btn-modal-confirm" style={{background: '#ff6b6b'}} onClick={executeDelete}>Hapus</button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <BottomNav />
     </>
   );
