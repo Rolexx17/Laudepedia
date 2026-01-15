@@ -1,6 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+/**
+ * BOTTOM NAVIGATION COMPONENT
+ * Bar navigasi bawah yang dirancang khusus untuk tampilan perangkat seluler (Mobile-first).
+ * * * * Components:
+ * * 1. BottomNav (Parent)
+ * - Kontainer utama yang diposisikan secara absolut di bagian bawah layar.
+ * - Variables:
+ * - className: String - Bootstrap classes (position-fixed, bottom-0) untuk menahan navigasi di dasar layar.
+ * - style (zIndex): Number - Memastikan bar navigasi tetap berada di atas konten halaman lainnya.
+ * * 2. NavItem (Child)
+ * - Komponen reusable untuk setiap tombol navigasi.
+ * - Props:
+ * - icon: String - Nama ikon Bootstrap Icons (misal: 'house', 'person').
+ * - label: String - Teks keterangan di bawah ikon.
+ * - to: String - Alamat URL tujuan navigasi menggunakan React Router Link.
+ * * * * Visual Logic:
+ * - Menggunakan Flexbox (justify-content-around) untuk membagi ruang tombol secara merata.
+ * - Warna tema: #bfa76a (Gold/Elegance) diterapkan pada ikon dan teks.
+ */
+
 const BottomNav = () => {
   return (
     <nav
