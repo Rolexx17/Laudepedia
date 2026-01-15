@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../css/Home.css';
-import { products } from '../js/products'
+import { products } from '../js/products';
 import Navbar from '../components/Navbar';
 import BottomNav from '../components/BottomNav';
 
