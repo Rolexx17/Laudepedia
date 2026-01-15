@@ -5,6 +5,19 @@ import { products } from '../js/products'
 import Navbar from '../components/Navbar';
 import BottomNav from '../components/BottomNav';
 
+/**
+ * HOME PAGE COMPONENT
+ * Halaman utama aplikasi yang berfungsi sebagai dashboard pusat akses berbagai fitur.
+ * Menampilkan menu fitur, banner promo, konten video, dan produk pilihan.
+ * * Hooks:
+ * - useNavigate: Digunakan untuk menangani navigasi antar kategori (Game, Fashion, Beauty, Tech).
+ * * Sections:
+ * - Feature Icons: Akses cepat ke modul-modul utama aplikasi.
+ * - Banner: Carousell/Scroll horizontal untuk promosi visual.
+ * - LaudeVideo: Menampilkan konten video pendek produk.
+ * - Produk Pilihan: Grid produk kurasi terbaru.
+ */
+
 const HomePage = () => {
   const navigate = useNavigate();
 

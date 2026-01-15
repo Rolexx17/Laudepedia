@@ -3,6 +3,24 @@ import BottomNav from '../components/BottomNav';
 import { useProfile } from '../js/profile';
 import '../css/Profile.css';
 
+/**
+ * PROFILE PAGE COMPONENT
+ * Halaman profil pengguna yang menyediakan akses ke informasi akun, saldo koin, 
+ * riwayat transaksi, dan fitur pembaruan data profil.
+ * * * Logic & State (via useProfile Hook):
+ * - user: Object - Data pengguna aktif { fullname, email }.
+ * - balance: Number - Saldo koin pengguna yang sinkron dengan LocalStorage.
+ * - isEditing: Boolean - Status untuk beralih antara tampilan profil dan form edit.
+ * - showLogoutConfirm: Boolean - Mengontrol munculnya modal konfirmasi keluar.
+ * - formData: Object - Menyimpan data input sementara untuk proses update profil.
+ * - message: Object - Status pesan feedback (text & type) untuk aksi pengguna.
+ * * * Functions:
+ * - handleChange: Function - Sinkronisasi input field dengan state formData.
+ * - handleUpdateProfile: Function - Validasi dan penyimpanan perubahan data ke LocalStorage.
+ * - handleLogout: Function - Menghapus sesi aktif dan navigasi ke halaman Login.
+ * - navigate: Function - Navigasi antar rute (contoh: ke halaman History).
+ */
+
 const Profile = () => {
   const {
     user, balance, isEditing, setIsEditing,

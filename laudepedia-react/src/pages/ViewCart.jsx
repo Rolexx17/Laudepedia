@@ -9,6 +9,26 @@ import {
 } from '../js/cartService';
 import '../css/Cart.css';
 
+/**
+ * VIEW CART PAGE COMPONENT
+ * Halaman pengelola keranjang belanja (Shopping Bag) dan proses Checkout.
+ * Mengintegrasikan sistem manajemen item, kalkulasi biaya pengiriman, dan transaksi saldo.
+ * * * State:
+ * - cartItems: Array - Menyimpan daftar produk yang diambil dari LocalStorage 'cart'.
+ * - isCheckout: Boolean - Status untuk beralih antara tampilan daftar item dan formulir checkout.
+ * - balance: Number - Saldo koin user yang aktif.
+ * - currentUser: Object - Data user yang sedang login untuk keperluan identifikasi transaksi.
+ * - showConfirmModal: Boolean - Mengontrol visibilitas modal konfirmasi final pembayaran.
+ * - statusMsg: Object - Pesan feedback sistem { type: 'success/error', text: string }.
+ * - pendingAction: Object - Menyimpan data item yang akan dihapus untuk konfirmasi modal.
+ * - formData: Object - Menyimpan data pengiriman (address, courier, payment).
+ * * * Functions:
+ * - updateQty: Mengubah jumlah produk dan memperbarui LocalStorage secara sinkron.
+ * - executeDelete: Menghapus item tertentu atau mengosongkan seluruh keranjang.
+ * - handleOpenPaymentModal: Validasi kelengkapan data alamat dan kecukupan saldo.
+ * - processPayment: Memotong saldo, mencatat riwayat transaksi, dan mengosongkan keranjang.
+ */
+
 const ViewCart = () => {
   const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([]);

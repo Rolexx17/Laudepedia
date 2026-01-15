@@ -6,6 +6,22 @@ import Navbar from '../components/Navbar';
 import BottomNav from '../components/BottomNav';
 import '../css/Item.css';
 
+/**
+ * PRODUCT DETAIL COMPONENT
+ * Halaman rincian produk yang menampilkan informasi mendalam, harga, 
+ * serta fitur pemilihan kuantitas untuk dimasukkan ke dalam keranjang.
+ * * * State:
+ * - id: String (from Params) - ID unik produk yang diambil dari URL.
+ * - quantity: Number - Jumlah produk yang ingin ditambahkan (minimal 1).
+ * - isAdded: Boolean - State untuk memicu animasi perubahan teks/warna pada tombol Add to Cart.
+ * - showRedirectModal: Boolean - Mengontrol visibilitas modal navigasi setelah produk berhasil ditambah.
+ * - statusMsg: String - Pesan konfirmasi yang muncul pada banner bagian atas.
+ * * * Functions:
+ * - useEffect: Mengatur posisi scroll ke paling atas (0,0) saat halaman pertama kali dibuka.
+ * - handleAddToCart: Mengambil logika dari cart.js, memperbarui state UI, dan memicu timeout untuk modal.
+ * - setQuantity: Mengatur jumlah produk dengan batasan minimal angka 1.
+ */
+
 const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
