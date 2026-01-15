@@ -11,136 +11,89 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [isAdded, setIsAdded] = useState(false);
 
-  // Mencari produk berdasarkan ID dari URL
   const product = products.find(item => item.id === id);
 
-  // Scroll ke atas otomatis saat halaman dibuka
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  if (!product) {
-    return (
-      <div className="error-container">
-        <h2>Product Not Found</h2>
-        <button onClick={() => navigate('/')}>Back to Home</button>
-      </div>
-    );
-  }
+  if (!product) return <div style={{paddingTop: '100px', textAlign: 'center'}}>Produk Tidak Ditemukan</div>;
 
-  // --- LOGIKA ADD TO CART ---
   const handleAddToCart = () => {
-    // 1. Ambil data keranjang lama dari localStorage
     const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
-    
-    // 2. Cek apakah produk ini sudah ada di keranjang
     const existingItemIndex = existingCart.findIndex(item => item.id === product.id);
-
     if (existingItemIndex > -1) {
-      // Jika sudah ada, update jumlahnya
       existingCart[existingItemIndex].qty += parseInt(quantity);
     } else {
-      // Jika belum ada, masukkan sebagai objek baru
-      existingCart.push({
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        image: product.image,
-        qty: parseInt(quantity)
-      });
+      existingCart.push({ ...product, qty: parseInt(quantity) });
     }
-
-    // 3. Simpan kembali ke localStorage
     localStorage.setItem('cart', JSON.stringify(existingCart));
-
-    // 4. Feedback Visual: Ganti teks tombol sementara
     setIsAdded(true);
     setTimeout(() => setIsAdded(false), 2000);
-
-    // 5. Konfirmasi navigasi ke halaman Cart
-    const goToCart = window.confirm("Berhasil ditambahkan ke keranjang! Lihat keranjang sekarang?");
-    if (goToCart) {
-      navigate('/cart');
-    }
+    if (window.confirm("Berhasil! Lihat keranjang sekarang?")) navigate('/cart');
   };
 
   return (
-    <div className="product-detail-page">
+    <div className="product-page-root">
       <Navbar />
 
-      {/* Tombol Back Melayang */}
-      <button className="floating-back-btn" onClick={() => navigate(-1)}>
-        &#8592; Back
-      </button>
+      <main className="main-content-scrollable">
+        <button className="back-btn-fixed" onClick={() => navigate(-1)}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+          <span>Back</span>
+        </button>
 
-      <main className="item-container">
-        <div className="item-layout">
-          
-          {/* Bagian Kiri: Gambar */}
-          <div className="item-image-section">
-            <div className="main-img-wrapper">
+        <div className="detail-grid">
+          <section className="image-panel">
+            <div className="image-wrapper-card">
               <img src={product.image} alt={product.name} />
+              {product.rating >= 4.8 && <span className="exclusive-badge">PREMIUM</span>}
             </div>
-          </div>
+          </section>
 
-          {/* Bagian Kanan: Detail & Aksi */}
-          <div className="item-info-section">
-            <nav className="breadcrumb">
-              Home / Shop / {product.category || 'Beauty'}
-            </nav>
+          <section className="info-panel">
+            <p className="cat-text">{product.category}</p>
+            <h1 className="item-name-display">{product.name}</h1>
             
-            <h1 className="item-title">{product.name}</h1>
-            
-            <div className="item-rating-row">
-              <span className="stars">★★★★★</span>
-              <span className="rating-text">{product.rating}/5</span>
-              <span className="review-count">({product.reviews} reviews)</span>
+            <div className="price-box">
+              <span className="rp">Rp</span>
+              <span className="nominal">{product.price.toLocaleString('id-ID')}</span>
             </div>
 
-            <p className="item-price-large">
-              Rp {product.price.toLocaleString('id-ID')}
-            </p>
-
-            <div className="item-description">
+            <div className="desc-box">
               <h3>Description</h3>
-              <p>
-                {product.description || "Indulge in the ultimate luxury with this curated selection. Designed for those who appreciate the finer things in beauty and wellness."}
-              </p>
+              <p>{product.description}</p>
             </div>
 
-            <div className="purchase-controls">
-              <div className="qty-picker">
-                <button onClick={() => setQuantity(Math.max(1, quantity - 1))}>-</button>
-                <input 
-                  type="number" 
-                  value={quantity} 
-                  onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-                />
-                <button onClick={() => setQuantity(quantity + 1)}>+</button>
+            <div className="action-row">
+              <div className="qty-picker-container">
+                <button className="qty-btn" onClick={() => setQuantity(Math.max(1, quantity - 1))}>
+                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+                     <line x1="5" y1="12" x2="19" y2="12"></line>
+                   </svg>
+                </button>
+                
+                <input type="number" value={quantity} readOnly className="qty-number-input" />
+                
+                <button className="qty-btn" onClick={() => setQuantity(quantity + 1)}>
+                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+                     <line x1="12" y1="5" x2="12" y2="19"></line>
+                     <line x1="5" y1="12" x2="19" y2="12"></line>
+                   </svg>
+                </button>
               </div>
-
-              <button 
-                className={`add-to-cart-btn ${isAdded ? 'success' : ''}`}
-                onClick={handleAddToCart}
-              >
-                {isAdded ? '✓ Added to Bag' : 'Add to Cart'}
+              
+              <button className={`btn-add-cart ${isAdded ? 'success' : ''}`} onClick={handleAddToCart}>
+                {isAdded ? '✓ Added' : 'Add to Cart'}
               </button>
             </div>
-
-            <div className="item-features">
-              <div className="feature">
-                <span>🚚</span> Free Shipping
-              </div>
-              <div className="feature">
-                <span>✨</span> 100% Authentic
-              </div>
-            </div>
-          </div>
-
+          </section>
         </div>
       </main>
 
-      <footer className="detail-footer">
+      <footer className="item-footer">
         <p>© 2026 Laudepedia — Elegance in Every Choice.</p>
       </footer>
 

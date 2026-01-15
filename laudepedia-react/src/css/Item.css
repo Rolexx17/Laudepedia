@@ -1,156 +1,161 @@
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #fcfcfc;
-    margin: 0;
-    color: #202020;
-}
-* {
-    box-sizing: border-box;
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+
+.product-page-root {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #fff;
+    min-height: 100vh;
 }
 
-html, body {
-    width: 100%;
-    overflow-x: hidden; /* 🔥 KUNCI HILANGIN GAP */
-    margin: 0;
-    padding: 0;
+.main-content-scrollable {
+    padding: 100px 20px 120px;
+    max-width: 1100px;
+    margin: 0 auto;
+    animation: fadeInUp 0.8s ease-out; /* Animasi Masuk Halaman */
 }
 
-/* ================= BACK BUTTON ================= */
-.back-btn {
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.back-btn-fixed {
     position: fixed;
-    top: 1.5rem;
-    left: 1.5rem;
-    background-color: white;
-    border: none;
-    border-radius: 50%;
-    width: 65px;
-    height: 65px;
+    top: 90px;
+    left: 30px;
+    z-index: 2000;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    padding: 8px 16px;
+    border-radius: 50px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.15);
-    color: #b8860b;
-    font-size: 2rem;
+    gap: 8px;
+    font-weight: 700;
     cursor: pointer;
-    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
 }
 
-/* ================= HEADER ================= */
-.lp-header {
-    text-align: center;
-    padding: 2.5rem 0;
-    background: linear-gradient(90deg, #ffffff 0%, #fffde6 100%);
-    color: #b8860b;
-    font-weight: 600;
-    letter-spacing: 0.35rem;
-    box-shadow: 0 0.2rem 0.8rem rgba(184, 134, 11, 0.15);
-}
-.item-image,
-.item-info {
-    flex: 1;
-    min-width: 0;
+.back-btn-fixed:hover {
+    transform: translateX(-5px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
 }
 
-/* ================= CONTAINER ================= */
-.item-container {
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    margin-top: 50px;
+}
+
+.image-wrapper-card {
+    border-radius: 20px;
+    overflow: hidden;
+    background: #f9f9f9;
+}
+
+.image-wrapper-card img {
     width: 100%;
-    padding: 3rem clamp(1.5rem, 5vw, 4rem);
-
-    background-color: #ffffff;
-    border-radius: 1rem;
-    box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.06);
-
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-
-
-/* ================= IMAGE ================= */
-.item-image {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.image-wrapper-card:hover img {
+    transform: scale(1.08); /* Animasi Zoom Gambar */
 }
 
-.item-info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 1.4rem;
-}
-
-
-.item-image img {
-    width: 100%;
-    max-width: 600px;
-    height: auto;
-    border-radius: 0.75rem;
-    box-shadow: 0 1.2rem 3.5rem rgba(0, 0, 0, 0.15);
-}
-
-/* ================= INFO ================= */
-
-.item-title {
-    font-size: 3rem;
-    font-weight: 600;
-    line-height: 1.1;
-}
-
-.item-price {
-    font-size: 2rem;
-    color: #b8860b;
-    font-weight: 600;
-    border-bottom: 2px solid #fff5d1;
-    padding-bottom: 1rem;
-}
-
-.item-description {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: #555;
-}
-
-.item-rating {
-    font-size: 1.1rem;
-    color: #b8860b;
-}
-
-.item-rating span {
-    color: #777;
-}
-
-/* ================= ACTION ================= */
-.item-action {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.item-action input {
-    width: 60px;
-    height: 3rem;
-    text-align: center;
-    border: 1px solid #dcdcdc;
-    border-radius: 0.5rem;
-}
-
-.buy-btn {
-    background: linear-gradient(90deg, #d4af37, #b8860b);
+.exclusive-badge {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    background: #bfa76a;
     color: white;
-    border: none;
-    border-radius: 0.75rem;
-    padding: 1rem 3rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    animation: pulseBadge 2s infinite; /* Animasi Berkedip Halus */
 }
 
-/* ================= FOOTER ================= */
-.lp-footer {
+@keyframes pulseBadge {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.item-name-display { font-size: 2.4rem; font-weight: 800; line-height: 1.2; margin: 15px 0; }
+.nominal { font-size: 3rem; font-weight: 800; }
+.rp { color: #bfa76a; font-weight: 700; font-size: 1.3rem; margin-right: 5px; }
+
+/* QUANTITY SELECTOR WITH ANIMATION */
+.action-row {
+    display: flex;
+    gap: 20px;
+    margin-top: 40px;
+    height: 65px;
+}
+
+.qty-picker-container {
+    display: flex;
+    align-items: center;
+    border: 2px solid #ddd;
+    border-radius: 14px;
+    background: #fff;
+    padding: 6px;
+    min-width: 165px;
+}
+
+.qty-btn {
+    width: 50px;
+    height: 50px;
+    border: none;
+    background: #f0f0f0;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.qty-btn:active { transform: scale(0.9); }
+.qty-btn:hover { background: #e5e5e5; }
+
+.qty-number-input {
+    width: 60px;
+    border: none !important;
+    background: transparent !important;
     text-align: center;
-    color: #999;
-    padding: 2rem 0;
+    font-size: 1.5rem !important;
+    font-weight: 800 !important;
+    color: #000000 !important;
+    display: block !important;
+}
+
+/* BUTTON ADD TO CART ANIMATION */
+.btn-add-cart {
+    flex: 1;
+    background: #111;
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-add-cart:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    background: #333;
+}
+
+.btn-add-cart:active { transform: scale(0.98); }
+.btn-add-cart.success { background: #10b981; }
+
+.item-footer { text-align: center; padding: 60px 0; color: #ccc; }
+
+@media (max-width: 850px) {
+    .detail-grid { grid-template-columns: 1fr; }
+    .back-btn-fixed { top: 85px; left: 20px; }
 }

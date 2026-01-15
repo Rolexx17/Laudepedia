@@ -6,45 +6,45 @@ const Navbar = () => {
 
   return (
     <header
-      className="p-3 d-flex align-items-center justify-content-between sticky-top"
-      style={{ backgroundColor: '#bfa76a', zIndex: 1000 }}
+      style={{ 
+        backgroundColor: '#bfa76a', 
+        zIndex: 3000, 
+        padding: '0 1.5rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        height: '70px',
+        boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
+      }}
     >
-      {/* LOGO */}
       <h4
         className="fw-bold text-white m-0"
-        style={{ cursor: 'pointer' }}
+        style={{ cursor: 'pointer', letterSpacing: '1px' }}
         onClick={() => navigate('/')}
       >
         Laudepedia
       </h4>
 
-      {/* SEARCH */}
-      {/* <div className="input-group w-50 shadow-sm">
-        <span className="input-group-text border-0 bg-white">
-          <i className="bi bi-search" style={{ color: '#bfa76a' }}></i>
-        </span>
-        <input
-          type="text"
-          className="form-control border-0"
-          placeholder="Cari di Laudepedia..."
-        />
-      </div> */}
-
-      {/* RIGHT MENU */}
-      <div className="d-flex align-items-center gap-3">
+      <div className="d-flex align-items-center gap-4">
         <span
-          className="text-white fw-semibold"
-          style={{ cursor: 'pointer' }}
+          className="text-white fw-semibold d-none d-md-block"
+          style={{ cursor: 'pointer', fontSize: '0.9rem' }}
           onClick={() => navigate('/about')}
         >
           About Us
         </span>
 
-        <i
-          className="bi bi-cart-fill text-white fs-4"
-          style={{ cursor: 'pointer' }}
-          onClick={() => alert('Coming Soon!')}
-        ></i>
+        <div style={{ cursor: 'pointer' }} onClick={() => navigate('/cart')}>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+        </div>
       </div>
     </header>
   );

@@ -5,28 +5,17 @@ body {
   transition: background 0.3s ease;
 }
 
+/* KUNCI: Jarak agar konten tidak tertutup Navbar Fixed */
+.main-content-wrapper {
+  padding-top: 75px; /* Sesuaikan dengan tinggi Navbar 70px + margin */
+}
+
 /* Warna emas khas Laudepedia */
 .text-gold { color: #bfa76a !important; }
 .bg-gold { background-color: #bfa76a !important; }
 
 /* === HEADER === */
-header {
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  transition: all 0.3s ease;
-}
-header:hover {
-  background-color: #bfa76aee;
-}
-header .bi-cart {
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-header .bi-cart:hover {
-  transform: scale(1.2) rotate(-10deg);
-}
+/* Catatan: Navbar sekarang dikontrol style inline di component-nya (Fixed) */
 
 /* Search bar */
 .input-group input {
@@ -39,27 +28,12 @@ header .bi-cart:hover {
 }
 
 /* === FEATURE ICONS === */
-.icon-circle {
-  width: 55px;
-  height: 55px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  box-shadow: 0 2px 5px rgba(191, 167, 106, 0.3);
+.icon-circle-wrapper {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.icon-circle:hover {
+.icon-circle-wrapper:hover {
   transform: translateY(-5px) scale(1.1);
   box-shadow: 0 4px 10px rgba(191, 167, 106, 0.4);
-}
-
-a.item {
-  text-decoration: none;
-  transition: transform 0.3s ease;
-}
-a.item:hover {
-  transform: translateY(-3px);
 }
 
 /* Feature icon text */
@@ -68,15 +42,9 @@ section.bg-light p {
   font-weight: 500;
   transition: color 0.3s ease;
 }
-section.bg-light p:hover {
-  color: #bfa76a;
-}
 
 /* === BANNER SCROLL === */
 .banner-scroll img {
-  height: 160px;
-  width: 320px;
-  object-fit: cover;
   cursor: pointer;
   transition: transform 0.4s ease, box-shadow 0.3s ease;
 }
@@ -102,42 +70,12 @@ video:hover {
 }
 
 /* === PRODUCT CARD === */
-.product-card {
-  cursor: pointer;
+.product-card-home {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border-radius: 1rem;
-  overflow: hidden;
-  background-color: #ffffff;
 }
-.product-card:hover {
-  transform: translateY(-5px) scale(1.03);
-  box-shadow: 0 6px 12px rgba(191, 167, 106, 0.3);
-}
-.product-img {
-  height: 200px;
-  object-fit: cover;
-  border-radius: 1rem;
-  transition: transform 0.4s ease;
-}
-.product-card:hover .product-img {
-  transform: scale(1.05);
-}
-
-.price-overlay {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background: rgba(191, 167, 106, 0.8);
-  text-align: center;
-  padding: 5px 0;
-  border-bottom-left-radius: 1rem;
-  border-bottom-right-radius: 1rem;
-  opacity: 0.95;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-.product-card:hover .price-overlay {
-  opacity: 1;
-  transform: translateY(-3px);
+.product-card-home:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(191, 167, 106, 0.3) !important;
 }
 
 /* === SCROLL ANIMATION === */
@@ -147,14 +85,6 @@ video:hover {
 }
 section {
   animation: fadeUp 0.8s ease both;
-}
-
-/* === RESPONSIVE TWEAK === */
-@media (min-width: 768px) {
-  .banner-scroll img {
-    height: 200px;
-    width: 380px;
-  }
 }
 
 /* === FOOTER NAVBAR === */
@@ -167,25 +97,4 @@ section {
   z-index: 10;
   border-top: 2px solid #bfa76a30;
   backdrop-filter: blur(5px);
-}
-
-.bottom-nav a {
-  color: #bfa78a;
-  text-decoration: none;
-  font-size: 13px;
-  text-align: center;
-  transition: all 0.3s ease;
-  border-radius: 10px;
-  padding: 3px 6px;
-}
-.bottom-nav a:hover {
-  color: white;
-  transform: translateY(-2px);
-}
-.bottom-nav a.active {
-  color: white;
-  background-color: #bfa76a;
-  border-radius: 15px;
-  padding: 3px 8px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
 }
