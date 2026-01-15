@@ -1,3 +1,23 @@
+/**
+ * USE PROFILE CUSTOM HOOK
+ * Hook fungsional untuk mengelola logika profil pengguna, saldo, dan manajemen akun.
+ * * * States (React Hooks):
+ * - user: Object - Menyimpan data user yang sedang login dari 'currentUser'.
+ * - balance: Number - Menyimpan saldo user yang diambil berdasarkan email unik.
+ * - isEditing: Boolean - Toggle status antara mode tampilan profil atau mode edit form.
+ * - showLogoutConfirm: Boolean - Modal state untuk konfirmasi sebelum keluar.
+ * - message: Object {type, text} - Menyimpan pesan feedback (error/success) untuk UI.
+ * - formData: Object - State penampung input form (fullname, email, password lama & baru).
+ * * * Functions:
+ * - useEffect: Inisialisasi data saat komponen dimuat, termasuk proteksi rute (redirect ke login jika tidak ada user).
+ * - handleChange: Function - Update state formData secara dinamis berdasarkan ID input.
+ * - handleUpdateProfile: Function - Validasi password, update array 'users', sinkronisasi 'currentUser', dan migrasi saldo jika email berubah.
+ * - handleLogout: Function - Menghapus session 'currentUser' dan mengarahkan pengguna kembali ke halaman login.
+ * * * Key Logic:
+ * - Password Validation: Minimal 8 karakter untuk password baru dan verifikasi password lama.
+ * - Storage Migration: Jika email diubah, data saldo dipindahkan ke kunci (key) email baru dan kunci lama dihapus.
+ */
+
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
