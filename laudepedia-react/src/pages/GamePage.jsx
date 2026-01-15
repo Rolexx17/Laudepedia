@@ -2,6 +2,21 @@ import React, { useState, useEffect, useRef } from 'react';
 import { calculateNewRotation, getWinningPrize } from '../js/gameLogic'; 
 import '../css/Game.css';
 
+/**
+ * GAME COMPONENT (Lucky Wheel)
+ * Fitur permainan roda keberuntungan untuk memenangkan coin dengan sistem taruhan.
+ * * * State:
+ * - balance: Number - Saldo coin user yang disimpan per-email di LocalStorage.
+ * - spinning: Boolean - Status apakah roda sedang dalam proses berputar.
+ * - prize: Object - Menyimpan data hadiah yang didapat { label: string, value: number }.
+ * - rotation: Number - Total derajat rotasi CSS untuk memutar roda.
+ * - isFlicking: Boolean - Trigger animasi visual jarum (flicker) saat menyentuh paku roda.
+ * * * Functions & Logic:
+ * - checkPhysics: Menggunakan requestAnimationFrame untuk mendeteksi posisi paku terhadap jarum secara real-time.
+ * - handleSpin: Mengurangi saldo (10 coins), menghitung rotasi baru, dan menentukan pemenang setelah 5 detik.
+ * - useEffect (Balance): Melakukan sinkronisasi otomatis antara state balance dan LocalStorage.
+ */
+
 const Game = () => {
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
