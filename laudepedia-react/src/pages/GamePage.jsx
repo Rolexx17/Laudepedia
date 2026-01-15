@@ -21,9 +21,9 @@ const Game = () => {
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
   const [balance, setBalance] = useState(() => {
-    if (!currentUser) return 100;
+    if (!currentUser) return 10000000;
     const savedBalance = localStorage.getItem(`balance_${currentUser.email}`);
-    return savedBalance !== null ? parseInt(savedBalance, 10) : 100;
+    return savedBalance !== null ? parseInt(savedBalance, 10) : 10000000;
   });
 
   const [spinning, setSpinning] = useState(false);
