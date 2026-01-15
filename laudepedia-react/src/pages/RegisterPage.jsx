@@ -2,6 +2,19 @@ import React, { useState } from 'react';
 import { registerUser } from '../js/authService';
 import '../css/Log_Regis.css';
 
+/**
+ * REGISTER PAGE COMPONENT
+ * Halaman pendaftaran pengguna baru yang berinteraksi dengan authService.
+ * Mengelola input user, validasi sederhana, dan feedback UI (sukses/error).
+ * * * State:
+ * - formData: Object - Menyimpan data input form { fullname, email, password }.
+ * - error: String - Menyimpan pesan kesalahan jika validasi atau pendaftaran gagal.
+ * - success: String - Menyimpan pesan sukses jika akun berhasil dibuat.
+ * * * Functions:
+ * - handleChange: Function(e) - Mengupdate state formData saat user mengetik dan mereset notifikasi.
+ * - handleSubmit: Function(e) - Mengirim data ke registerUser dan memperbarui state berdasarkan hasil (sukses/gagal).
+ */
+
 const Register = () => {
   const [formData, setFormData] = useState({ fullname: '', email: '', password: '' });
   const [error, setError] = useState('');
