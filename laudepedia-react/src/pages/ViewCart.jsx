@@ -143,16 +143,16 @@ const ViewCart = () => {
           )}
 
           <div className="cart-header-row">
-            <h1 className="cart-header-title">Shopping Bag</h1>
+            <h1 className="cart-header-title">Shopping Cart</h1>
             {cartItems.length > 0 && (
-              <button className="btn-remove-all" onClick={confirmRemoveAll}>Clear All Bag</button>
+              <button className="btn-remove-all" onClick={confirmRemoveAll}>Remove All Item(s)</button>
             )}
           </div>
           
           {cartItems.length === 0 ? (
             <div className="cart-empty-box">
-              <p>Keranjang belanja Anda kosong.</p>
-              <button className="btn-checkout" style={{width: 'auto', padding: '12px 30px'}} onClick={() => navigate('/home')}>Lihat Koleksi</button>
+              <p>Your shopping cart is empty.</p>
+              <button className="btn-checkout" style={{width: 'auto', padding: '12px 30px'}} onClick={() => navigate('/home')}>Show Collection</button>
             </div>
           ) : (
             <div className="cart-content-row">
@@ -176,24 +176,24 @@ const ViewCart = () => {
               </div>
 
               <div className="cart-summary-panel">
-                <h3 className="summary-title">Ringkasan</h3>
+                <h3 className="summary-title">My Cart</h3>
                 <div className="summary-line balance-highlight">
-                  <span>Saldo Anda</span>
+                  <span>Your Balance</span>
                   <span>Rp {balance.toLocaleString('id-ID')}</span>
                 </div>
                 <div className="summary-line">
-                  <span>Total Harga</span>
+                  <span>Grand Total</span>
                   <span>Rp {subtotal.toLocaleString('id-ID')}</span>
                 </div>
 
                 {isCheckout && (
                   <div className="checkout-form">
                     <div className="form-group">
-                      <label>Alamat Pengiriman</label>
+                      <label>Adress</label>
                       <textarea rows="2" value={formData.address} onChange={(e) => setFormData({...formData, address: e.target.value})} />
                     </div>
                     <div className="form-group">
-                      <label>Kurir</label>
+                      <label>Shipper</label>
                       <select value={formData.courier} onChange={(e) => setFormData({...formData, courier: e.target.value})}>
                         <option value="jne">JNE (Rp 15.000)</option>
                         <option value="jnt">J&T (Rp 18.000)</option>
@@ -205,18 +205,18 @@ const ViewCart = () => {
                 )}
 
                 <div className="summary-line total">
-                  <span>Total Bayar</span>
+                  <span>Grand Total</span>
                   <span>Rp {grandTotal.toLocaleString('id-ID')}</span>
                 </div>
 
                 {isCheckout && balance < grandTotal && (
                   <div className="balance-error-msg">
-                    Saldo tidak mencukupi untuk transaksi ini.
+                    Insufficient balance for this transaction.
                   </div>
                 )}
 
                 {!isCheckout ? (
-                  <button className="btn-checkout" onClick={() => setIsCheckout(true)}>Lanjut Ke Checkout</button>
+                  <button className="btn-checkout" onClick={() => setIsCheckout(true)}>Continue to Checkout</button>
                 ) : (
                   <>
                     <button 
@@ -225,9 +225,9 @@ const ViewCart = () => {
                       disabled={balance < grandTotal}
                       style={{ opacity: balance < grandTotal ? 0.5 : 1, cursor: balance < grandTotal ? 'not-allowed' : 'pointer' }}
                     >
-                      Bayar Sekarang
+                      Pay Now
                     </button>
-                    <button className="btn-cancel-text" onClick={() => setIsCheckout(false)}>Kembali</button>
+                    <button className="btn-cancel-text" onClick={() => setIsCheckout(false)}>Back</button>
                   </>
                 )}
               </div>
@@ -239,15 +239,15 @@ const ViewCart = () => {
       {showConfirmModal && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <h3 style={{fontFamily: 'Playfair Display'}}>Konfirmasi Pembayaran</h3>
-            <p>Lanjutkan pemotongan saldo untuk pesanan ini?</p>
+            <h3 style={{fontFamily: 'Playfair Display'}}>Payment Confirmation</h3>
+            <p>Continue deducting balance for this order?</p>
             <div className="modal-details">
-              <div className="modal-line"><span>Total Bayar:</span> <strong>Rp {grandTotal.toLocaleString('id-ID')}</strong></div>
-              <div className="modal-line"><span>Saldo Sisa:</span> <span>Rp {(balance - grandTotal).toLocaleString('id-ID')}</span></div>
+              <div className="modal-line"><span>Grand Total:</span> <strong>Rp {grandTotal.toLocaleString('id-ID')}</strong></div>
+              <div className="modal-line"><span>Remaining Balance:</span> <span>Rp {(balance - grandTotal).toLocaleString('id-ID')}</span></div>
             </div>
             <div className="modal-actions">
-              <button className="btn-modal-cancel" onClick={() => setShowConfirmModal(false)}>Batal</button>
-              <button className="btn-modal-confirm" onClick={processPayment}>Ya, Bayar</button>
+              <button className="btn-modal-cancel" onClick={() => setShowConfirmModal(false)}>No</button>
+              <button className="btn-modal-confirm" onClick={processPayment}>Yes</button>
             </div>
           </div>
         </div>
@@ -256,11 +256,11 @@ const ViewCart = () => {
       {pendingAction && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <h3 style={{fontFamily: 'Playfair Display'}}>Hapus Item?</h3>
+            <h3 style={{fontFamily: 'Playfair Display'}}>Delete Item?</h3>
             <p>{pendingAction.type === 'ALL' ? 'Apakah Anda yakin ingin mengosongkan seluruh keranjang?' : 'Hapus item ini dari daftar belanja Anda?'}</p>
             <div className="modal-actions">
-              <button className="btn-modal-cancel" onClick={() => setPendingAction(null)}>Batal</button>
-              <button className="btn-modal-confirm" style={{background: '#ff6b6b'}} onClick={executeDelete}>Hapus</button>
+              <button className="btn-modal-cancel" onClick={() => setPendingAction(null)}>Cancel</button>
+              <button className="btn-modal-confirm" style={{background: '#ff6b6b'}} onClick={executeDelete}>Delete</button>
             </div>
           </div>
         </div>
