@@ -44,7 +44,7 @@ const Game = () => {
     { label: '150k', value: 150000 }, { label: '10k', value: 10000 },
     { label: '20k', value: 20000 }, { label: '0', value: 0 },
     { label: '300k', value: 300000 }, { label: '5k', value: 5000 },
-    { label: '40k', value: 40000 }, { label: 'Lucky 7', value: 77777 },
+    { label: '40k', value: 40000 }, { label: 'Lucky 7', value: 7777777 },
   ];
 
   useEffect(() => {
