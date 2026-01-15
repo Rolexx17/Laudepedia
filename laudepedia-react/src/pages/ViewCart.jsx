@@ -143,7 +143,7 @@ const ViewCart = () => {
           )}
 
           <div className="cart-header-row">
-            <h1 className="cart-header-title">Shopping Cart</h1>
+            <h1 className="cart-header-title">Receipt</h1>
             {cartItems.length > 0 && (
               <button className="btn-remove-all" onClick={confirmRemoveAll}>Remove All Item(s)</button>
             )}
