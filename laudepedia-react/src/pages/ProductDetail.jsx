@@ -36,13 +36,13 @@ const ProductDetail = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  if (!product) return <div style={{paddingTop: '100px', textAlign: 'center'}}>Produk Tidak Ditemukan</div>;
+  if (!product) return <div style={{paddingTop: '100px', textAlign: 'center'}}>Product Not Found</div>;
 
   const handleAddToCart = () => {
     addToCartLogic(product, quantity); // Menggunakan fungsi dari file JS terpisah
     
     setIsAdded(true);
-    setStatusMsg('Berhasil ditambahkan ke keranjang!');
+    setStatusMsg('Successfully added to cart!');
     
     setTimeout(() => {
       setIsAdded(false);
@@ -125,11 +125,11 @@ const ProductDetail = () => {
         <div className="modal-overlay-item">
           <div className="modal-content-item">
             <div className="success-icon-circle">✓</div>
-            <h3 style={{color: '#111'}}>Berhasil Ditambahkan!</h3>
-            <p>Produk telah masuk ke keranjang belanja Anda.</p>
+            <h3 style={{color: '#111'}}>Successfully Added!</h3>
+            <p>The product has been added to your cart.</p>
             <div className="modal-actions-item">
-              <button className="btn-stay" onClick={() => setShowRedirectModal(false)}>Lanjut Belanja</button>
-              <button className="btn-go-cart" onClick={() => navigate('/cart')}>Lihat Keranjang</button>
+              <button className="btn-stay" onClick={() => setShowRedirectModal(false)}>Continue Shopping</button>
+              <button className="btn-go-cart" onClick={() => navigate('/cart')}>View Cart</button>
             </div>
           </div>
         </div>
