@@ -34,11 +34,11 @@ const History = () => {
     <>
       <Navbar />
       <div style={{ padding: '100px 20px', maxWidth: '600px', margin: '0 auto', minHeight: '100vh' }}>
-        <h2 style={{ fontFamily: 'Playfair Display', fontWeight: 'bold', marginBottom: '30px' }}>Riwayat Transaksi</h2>
+        <h2 style={{ fontFamily: 'Playfair Display', fontWeight: 'bold', marginBottom: '30px' }}>Purchase History</h2>
 
         {transactions.length === 0 ? (
           <div style={{ textAlign: 'center', color: '#888', marginTop: '50px' }}>
-            <p>Belum ada transaksi</p>
+            <p>You don't have any transactions yet.</p>
           </div>
         ) : (
           transactions.map((trx) => (
@@ -62,10 +62,10 @@ const History = () => {
               ))}
 
               <div style={{ borderTop: '1px dashed #eee', marginTop: '15px', paddingTop: '15px', display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '0.9rem' }}>Total Bayar</span>
+                <span style={{ fontSize: '0.9rem' }}>Grand Total</span>
                 <span style={{ fontWeight: 'bold', color: '#000' }}>Rp {trx.total.toLocaleString('id-ID')}</span>
               </div>
-              <div style={{ fontSize: '0.75rem', color: '#aaa', marginTop: '5px' }}>Dikirim ke: {trx.address}</div>
+              <div style={{ fontSize: '0.75rem', color: '#aaa', marginTop: '5px' }}>Ship to: {trx.address}</div>
             </div>
           ))
         )}
