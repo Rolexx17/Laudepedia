@@ -37,6 +37,8 @@ export const registerUser = (formData) => {
     return { success: false, message: "This email is already registered!" };
   }
 
+  localStorage.setItem(`balance_${formData.email.toLowerCase()}`, "10000000");
+
   const updatedUsers = [...existingUsers, formData];
   localStorage.setItem('users', JSON.stringify(updatedUsers));
   return { success: true, message: "Account created successfully!" };
