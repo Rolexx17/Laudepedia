@@ -15,7 +15,8 @@ import BeautyPage from './pages/BeautyPage';
 import TechPage from './pages/TechPage';
 import ProductDetail from './pages/ProductDetail';
 import AboutUsPage from './pages/AboutUsPage';
-import ViewCart from './pages/ViewCart'; // Kita gunakan ini sebagai halaman keranjang
+import ViewCart from './pages/ViewCart';
+import HistoryPage from './pages/HistoryPage';
 
 const ProtectedRoute = ({ children }) => {
   const currentUser = localStorage.getItem('currentUser');
@@ -64,6 +65,12 @@ function App() {
               <ProfilePage />
             </ProtectedRoute>
           } />
+
+          <Route path="/history" element={
+            <ProtectedRoute>
+              <HistoryPage />
+            </ProtectedRoute>
+          } />
           
           <Route path="/game" element={
             <ProtectedRoute>
@@ -89,14 +96,12 @@ function App() {
             </ProtectedRoute>
           } />
           
-          {/* Detail Produk - Cukup satu rute saja */}
           <Route path="/product/:id" element={
             <ProtectedRoute>
               <ProductDetail />
             </ProtectedRoute>
           } />
 
-          {/* HALAMAN KERANJANG - Pastikan path ini sesuai dengan navigate('/cart') di ProductDetail */}
           <Route path="/cart" element={
             <ProtectedRoute>
               <ViewCart />
