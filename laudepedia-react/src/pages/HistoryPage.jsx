@@ -2,6 +2,23 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import BottomNav from '../components/BottomNav';
 
+/**
+ * HISTORY PAGE COMPONENT
+ * Halaman riwayat transaksi yang menampilkan daftar pembelian masa lalu pengguna.
+ * * * * States (React Hooks):
+ * - transactions: Array - Menyimpan kumpulan objek transaksi yang diambil dari LocalStorage.
+ * * * * Lifecycle & Logic:
+ * - useEffect: Mengambil session 'currentUser' untuk mendapatkan email, kemudian mengambil data 
+ * dengan kunci `history_${email}`. Jika data ada, dimasukkan ke state `transactions`.
+ * * * * Data Rendering:
+ * - Conditional Rendering: Menampilkan pesan "Belum ada transaksi" jika array kosong.
+ * - Nested Mapping: 
+ * 1. Loop Utama (.map trx): Membuat kartu (card) untuk setiap ID transaksi unik.
+ * 2. Loop Dalam (.map item): Menampilkan detail produk (gambar, nama, qty) di dalam satu transaksi.
+ * * * * Formating:
+ * - .toLocaleString('id-ID'): Mengonversi tipe data Number menjadi format mata uang Rupiah secara otomatis.
+ */
+
 const History = () => {
   const [transactions, setTransactions] = useState([]);
 

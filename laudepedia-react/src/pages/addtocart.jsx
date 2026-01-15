@@ -4,6 +4,22 @@ import Navbar from '../components/Navbar';
 import BottomNav from '../components/BottomNav';
 import '../css/Cart.css'; // Kita pakai CSS baru agar rapi
 
+/**
+ * ADD TO CART / CART PAGE COMPONENT
+ * Halaman keranjang belanja yang menampilkan daftar produk yang dipilih user,
+ * kalkulasi total harga (subtotal + ongkir), serta formulir checkout.
+ * * State:
+ * - cartItems: Array - Menyimpan daftar objek produk (id, name, price, qty, image) dari LocalStorage.
+ * - address: String - Menyimpan input alamat pengiriman user.
+ * - courier: String - Menyimpan opsi kurir yang dipilih (jne, jnt, sicepat, instant).
+ * - payment: String - Menyimpan metode pembayaran yang dipilih (bca, cod, gopay).
+ * * Functions:
+ * - updateQuantity: Function (id, delta) - Menambah atau mengurangi jumlah item dalam keranjang.
+ * - removeItem: Function (id) - Menghapus item spesifik dari keranjang setelah konfirmasi.
+ * - getShippingCost: Function - Mengembalikan nilai ongkir (int) berdasarkan kurir yang dipilih.
+ * - handleCheckout: Function - Memvalidasi form, menampilkan alert sukses, menghapus data cart, dan redirect ke home.
+ */
+
 const AddToCart = () => {
   const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([]);
