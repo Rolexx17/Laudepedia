@@ -143,7 +143,7 @@ const ViewCart = () => {
           )}
 
           <div className="cart-header-row">
-            <h1 className="cart-header-title">Receipt</h1>
+            <h1 className="cart-header-title">My Cart</h1>
             {cartItems.length > 0 && (
               <button className="btn-remove-all" onClick={confirmRemoveAll}>Remove All Item(s)</button>
             )}
@@ -176,7 +176,7 @@ const ViewCart = () => {
               </div>
 
               <div className="cart-summary-panel">
-                <h3 className="summary-title">My Cart</h3>
+                <h3 className="summary-title">Receipt</h3>
                 <div className="summary-line balance-highlight">
                   <span>Your Balance</span>
                   <span>Rp {balance.toLocaleString('id-ID')}</span>
