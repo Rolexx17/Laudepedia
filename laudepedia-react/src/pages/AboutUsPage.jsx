@@ -1,8 +1,6 @@
 import React from 'react';
 import '../css/About.css';
 
-
-
 const AboutUsPage = () => {
   return (
     <div className="about-container d-flex flex-column align-items-center justify-content-center">
