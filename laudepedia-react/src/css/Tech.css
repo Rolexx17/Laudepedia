@@ -1,0 +1,44 @@
+/* Animasi Muncul */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-card {
+  animation: fadeInUp 0.5s ease backwards;
+}
+
+/* Hover Effect yang Halus */
+.tech-card-hover {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease !important;
+}
+
+.tech-card-hover:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}
+
+.tech-card-hover:active {
+  transform: scale(0.95);
+}
+
+/* Responsif Mobile Khusus */
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 1.8rem;
+  }
+  .tech-page {
+    padding-top: 80px !important;
+  }
+  /* Membuat scroll horizontal lebih mulus di HP */
+  .overflow-auto {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+}

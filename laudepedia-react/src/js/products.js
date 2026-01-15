@@ -16,7 +16,7 @@ export const products = [
     id: 'b2',
     category: 'fashion',
     name: 'Abstract Teal Oversized Knit Sweater',
-    price: 950000,
+    price: 1,
     image: '/resources/B2.jpg',
     rating: 4.7,
     reviews: 1200,

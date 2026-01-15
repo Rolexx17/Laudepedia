@@ -1,0 +1,90 @@
+/* Beauty.css */
+
+.beauty-page {
+  padding-top: 80px;
+}
+
+/* Reveal Animation */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(15px);
+  animation: beautyFadeIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes beautyFadeIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Card Interaction */
+.beauty-card-animated {
+  border-radius: 20px !important;
+  transition: all 0.4s ease;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.beauty-card-animated:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(191, 167, 106, 0.15) !important;
+}
+
+/* Image Container */
+.beauty-img-container {
+  height: 200px;
+  background: #fff;
+  overflow: hidden;
+  position: relative;
+}
+
+.beauty-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.beauty-card-animated:hover .beauty-img-container img {
+  transform: scale(1.1);
+}
+
+/* Input Styling */
+.beauty-input {
+  border-radius: 50px !important;
+  border: 1.5px solid #eee !important;
+  font-size: 0.95rem !important;
+  padding: 12px 20px !important;
+  transition: all 0.3s ease;
+}
+
+.beauty-input:focus {
+  border-color: #bfa76a !important;
+  box-shadow: 0 0 15px rgba(191, 167, 106, 0.1) !important;
+}
+
+/* Horizontal Scroll */
+.custom-scroll::-webkit-scrollbar {
+  height: 3px;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: #bfa76a;
+  border-radius: 10px;
+}
+
+/* Mobile Adaptation */
+@media (max-width: 768px) {
+  .beauty-page {
+    padding-top: 70px;
+  }
+  
+  .beauty-img-container {
+    height: 160px; /* Lebih proporsional di HP */
+  }
+
+  .beauty-card-animated {
+    border-radius: 15px !important;
+  }
+
+  .card-title {
+    font-size: 11px !important;
+  }
+}

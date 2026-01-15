@@ -1,26 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import BottomNav from '../components/BottomNav';
+import { filterAndSortProducts, getStaggerDelay } from '../js/fashion';
+import '../css/Fashion.css';
 
-/* ================= REUSABLE SEARCH CARD ================= */
-const SearchResultCard = ({ item, onClick }) => {
+const SearchResultCard = ({ item, onClick, index }) => {
   return (
-    <div className="col-6 col-md-3 mb-4">
-      <div
-        className="card h-100 shadow-sm border-0"
-        style={{ cursor: 'pointer' }}
-        onClick={onClick}
-      >
-        <div style={{ height: '220px', overflow: 'hidden' }}>
-          <img 
-            src={item.img} 
-            className="card-img-top" 
-            alt={item.name} 
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-          />
+    <div className="col-6 col-md-3 mb-4 reveal-item" style={getStaggerDelay(index)}>
+      <div className="card h-100 shadow-sm border-0 product-card-animated" onClick={onClick}>
+        <div className="img-wrapper">
+          <img src={item.img} className="card-img-top" alt={item.name} />
         </div>
-        <div className="card-body">
+        <div className="card-body p-2 p-md-3">
           <h6 className="card-title text-truncate small fw-bold">{item.name}</h6>
           <p className="fw-bold text-gold mb-0">{item.price}</p>
         </div>
@@ -32,9 +24,8 @@ const SearchResultCard = ({ item, onClick }) => {
 const FashionPage = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
-  const [sortType, setSortType] = useState('default'); // State untuk Sorting
+  const [sortType, setSortType] = useState('default');
 
-  /* ================= DATA TRENDING (Ditambah priceNum) ================= */
   const trendingFashion = [
     { id: 'b1', name: 'EDWIN Classic Faded Denim Jacket', priceNum: 1200000, price: 'Rp 1.200.000', img: '/resources/B1.jpg' },
     { id: 'b2', name: 'Abstract Teal Oversized Knit Sweater', priceNum: 950000, price: 'Rp 950.000', img: '/resources/B2.jpg' },
@@ -46,9 +37,6 @@ const FashionPage = () => {
     { id: 'b8', name: 'Vintage White Lace Dress', priceNum: 1700000, price: 'Rp 1.700.000', img: '/resources/B8.jpg' },
   ];
 
-  const stores = ['GAUDI', 'HUGO', 'LOONY', 'EXIT', 'MONOGRAM', 'NEWWAVE', 'LAUFE', 'PHOEBES', 'ZASTIN', 'CHOMA', 'SIXSEVEN', 'SILENE'];
-
-  /* ================= DATA RECOMMENDATION (Ditambah priceNum) ================= */
   const recommendations = [
     { id: 'b9', name: 'White Puff-Sleeve Ribbon Mini Dress', priceNum: 550000, price: 'Rp 550.000', img: '/resources/B9.jpg' },
     { id: 'b10', name: 'Gothic Cross Halter Crop', priceNum: 226000, price: 'Rp 226.000', img: '/resources/B10.jpg' },
@@ -60,54 +48,35 @@ const FashionPage = () => {
     { id: 't2', name: 'Coach Vintage Handbag', priceNum: 180000, price: 'Rp 180.000', img: '/resources/T2.jpg' },
   ];
 
-  /* ================= LOGIKA SEARCH & SORT ================= */
-  const allProducts = [...trendingFashion, ...recommendations];
-
-  const getProcessedProducts = () => {
-    // 1. Filter Search
-    let filtered = allProducts.filter((item) =>
-      item.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
-    // 2. Sort Logic
-    if (sortType === 'low') {
-      filtered.sort((a, b) => a.priceNum - b.priceNum);
-    } else if (sortType === 'high') {
-      filtered.sort((a, b) => b.priceNum - a.priceNum);
-    }
-    return filtered;
-  };
-
-  const displayProducts = getProcessedProducts();
+  const displayProducts = useMemo(() => 
+    filterAndSortProducts([...trendingFashion, ...recommendations], searchTerm, sortType),
+    [searchTerm, sortType]
+  );
 
   return (
     <>
       <Navbar />
-      <div className="fashion-page" style={{ paddingBottom: '80px' }}>
-        
-        {/* ================= HERO, SEARCH & SORT ================= */}
-        <section className="hero-section text-center py-5">
+      <div className="fashion-page">
+        <section className="hero-section text-center py-5 reveal-item">
           <div className="container">
-            <h1 className="fw-bold text-gold">Fashion Collection</h1>
-            <p className="text-muted">Stay trendy this season with our monthly picks</p>
+            <h1 className="fw-bold text-gold hero-title">Fashion Collection</h1>
+            <p className="text-muted hero-subtitle">Stay trendy this season with our monthly picks</p>
             
-            <div className="row justify-content-center mt-4 g-2">
-              <div className="col-md-5">
+            <div className="row justify-content-center mt-4 g-2 px-3">
+              <div className="col-12 col-md-5">
                 <input
                   type="text"
-                  className="form-control form-control-lg shadow-sm"
+                  className="form-control form-control-lg search-input-animated"
                   placeholder="Search jackets, dresses, bags..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  style={{ borderRadius: '30px', border: '2px solid #D4AF37' }}
                 />
               </div>
-              <div className="col-md-2">
+              <div className="col-12 col-md-2">
                 <select 
-                  className="form-select form-select-lg shadow-sm"
+                  className="form-select form-select-lg sort-select-animated"
                   value={sortType}
                   onChange={(e) => setSortType(e.target.value)}
-                  style={{ borderRadius: '30px', border: '2px solid #D4AF37', fontSize: '1rem' }}
                 >
                   <option value="default">Sort: Default</option>
                   <option value="low">Price: Low to High</option>
@@ -119,47 +88,35 @@ const FashionPage = () => {
         </section>
 
         {searchTerm || sortType !== 'default' ? (
-          /* ================= TAMPILAN HASIL SEARCH / SORT ================= */
-          <section className="search-results py-5 bg-light min-vh-100">
+          <section className="search-results py-4 bg-light min-vh-100">
             <div className="container">
-              <h3 className="mb-4">
+              <h3 className="mb-4 px-2">
                 {searchTerm ? `Results for: "${searchTerm}"` : "All Fashion Items"}
               </h3>
-              {displayProducts.length > 0 ? (
-                <div className="row">
-                  {displayProducts.map((item) => (
-                    <SearchResultCard 
-                      key={item.id} 
-                      item={item} 
-                      onClick={() => navigate(`/product/${item.id}`)} 
-                    />
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center py-5">
-                  <p className="text-muted">No items found.</p>
-                </div>
-              )}
+              <div className="row g-2 g-md-4">
+                {displayProducts.map((item, index) => (
+                  <SearchResultCard key={item.id} item={item} index={index} onClick={() => navigate(`/product/${item.id}`)} />
+                ))}
+              </div>
             </div>
           </section>
         ) : (
-          /* ================= TAMPILAN DEFAULT ================= */
           <>
             <section className="trending py-5 bg-light">
-              <div className="container">
-                <h2 className="fw-semibold text-gold mb-3">Trending Fashion</h2>
-                <div className="d-flex flex-nowrap overflow-auto pb-3">
-                  {trendingFashion.map((item) => (
+              <div className="container px-3">
+                <h2 className="fw-semibold text-gold mb-3 reveal-item">Trending Fashion</h2>
+                <div className="d-flex flex-nowrap overflow-auto pb-3 custom-scrollbar">
+                  {trendingFashion.map((item, index) => (
                     <div
                       key={item.id}
-                      className="card me-3 flex-shrink-0"
-                      style={{ width: '180px', cursor: 'pointer' }}
+                      className="card me-3 flex-shrink-0 product-card-animated reveal-item"
+                      style={{ ...getStaggerDelay(index), width: '180px' }}
                       onClick={() => navigate(`/product/${item.id}`)}
                     >
-                      <div style={{ height: '180px', overflow: 'hidden' }}>
-                        <img src={item.img} className="card-img-top h-100 w-100" alt={item.name} style={{ objectFit: 'cover' }} />
+                      <div className="img-wrapper" style={{ height: '180px' }}>
+                        <img src={item.img} className="card-img-top" alt={item.name} />
                       </div>
-                      <div className="card-body">
+                      <div className="card-body p-2">
                         <h6 className="card-title small text-truncate">{item.name}</h6>
                         <p className="fw-bold text-gold mb-0">{item.price}</p>
                       </div>
@@ -169,38 +126,12 @@ const FashionPage = () => {
               </div>
             </section>
 
-            <section className="stores py-5">
-              <div className="container">
-                <div className="d-flex justify-content-between align-items-center mb-3">
-                  <h2 className="fw-semibold text-gold mb-0">Popular Stores</h2>
-                  <span className="text-gold small" style={{ cursor: 'pointer' }}>See All →</span>
-                </div>
-                <div className="d-flex flex-nowrap overflow-auto pb-3">
-                  {stores.map((store, index) => (
-                    <div key={index} className="text-center p-4 me-3 rounded bg-light border flex-shrink-0" style={{ minWidth: '120px', fontWeight: '500' }}>
-                      {store}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
-
             <section className="recommendations py-5 bg-light">
-              <div className="container">
-                <h2 className="text-center mb-4 fw-semibold text-gold">Recommended for You</h2>
-                <div className="row">
-                  {recommendations.map((item) => (
-                    <div key={item.id} className="col-6 col-md-3 mb-4">
-                      <div className="card h-100 border-0 shadow-sm" style={{ cursor: 'pointer' }} onClick={() => navigate(`/product/${item.id}`)}>
-                        <div style={{ height: '250px', overflow: 'hidden' }}>
-                          <img src={item.img} className="card-img-top h-100 w-100" alt={item.name} style={{ objectFit: 'cover' }} />
-                        </div>
-                        <div className="card-body">
-                          <h6 className="card-title small fw-bold">{item.name}</h6>
-                          <p className="fw-bold text-gold mb-0">{item.price}</p>
-                        </div>
-                      </div>
-                    </div>
+              <div className="container px-3">
+                <h2 className="text-center mb-4 fw-semibold text-gold reveal-item">Recommended for You</h2>
+                <div className="row g-2 g-md-4">
+                  {recommendations.map((item, index) => (
+                    <SearchResultCard key={item.id} item={item} index={index} onClick={() => navigate(`/product/${item.id}`)} />
                   ))}
                 </div>
               </div>
@@ -209,7 +140,7 @@ const FashionPage = () => {
         )}
 
         <footer className="text-center py-4 bg-white border-top">
-          <p className="mb-0 text-muted">© 2025 Laudepedia Fashion. All Rights Reserved.</p>
+          <p className="mb-0 text-muted">© 2025 Laudepedia Fashion.</p>
         </footer>
       </div>
       <BottomNav />

@@ -1,0 +1,101 @@
+/* NAVBAR STYLING & ANIMATIONS */
+
+.navbar-fixed {
+  background-color: #bfa76a;
+  z-index: 3000;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.12);
+}
+
+.brand-logo {
+  color: white;
+  margin: 0;
+  font-weight: bold;
+  cursor: pointer;
+  letter-spacing: 1px;
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-link-item {
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.9rem;
+  white-space: nowrap; /* Mencegah teks terpotong ke bawah */
+  transition: all 0.3s ease;
+}
+
+.nav-link-item:hover {
+  opacity: 0.8;
+  transform: translateY(-2px);
+}
+
+.cart-icon-wrapper {
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cart-icon-wrapper:hover {
+  transform: scale(1.2) rotate(-5deg);
+}
+
+/* --- ANIMATIONS --- */
+
+.animate-slide-down {
+  animation: slideDown 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.animate-text-focus {
+  animation: textFocus 0.8s ease-in-out both;
+}
+
+@keyframes slideDown {
+  0% { transform: translateY(-100%); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes textFocus {
+  0% { filter: blur(5px); opacity: 0; }
+  100% { filter: blur(0); opacity: 1; }
+}
+
+/* --- RESPONSIVE MOBILE ADJUSTMENT --- */
+
+@media (max-width: 480px) {
+  .navbar-fixed {
+    padding: 0 0.8rem;
+    height: 60px;
+  }
+  
+  .brand-logo {
+    font-size: 1.1rem; /* Logo mengecil di HP */
+  }
+
+  .nav-actions {
+    gap: 0.8rem; /* Jarak antar item merapat di HP */
+  }
+
+  .nav-link-item {
+    font-size: 0.75rem; /* Teks About Us mengecil agar tidak hilang */
+  }
+
+  .cart-svg {
+    width: 20px; /* Icon cart mengecil di HP */
+    height: 20px;
+  }
+}

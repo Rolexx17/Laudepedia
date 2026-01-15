@@ -1,24 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { products } from '../data/products';
+import { products } from '../js/products';
 import Navbar from '../components/Navbar';
 import BottomNav from '../components/BottomNav';
+import { useTechLogic } from '../js/tech'; // Import logic
+import '../css/Tech.css'; // Import animasi
 
-/* ================= REUSABLE SEARCH CARD (GRID STYLE) ================= */
-const SearchResultCard = ({ item, onClick }) => {
+const SearchResultCard = ({ item, onClick, index }) => {
   return (
-    <div className="col-6 col-md-3 mb-4">
+    <div className="col-6 col-md-3 mb-4 animate-card" style={{ animationDelay: `${index * 0.1}s` }}>
       <div
-        className="card h-100 shadow-sm border-0"
-        style={{ cursor: 'pointer' }}
+        className="card h-100 shadow-sm border-0 tech-card-hover"
+        style={{ cursor: 'pointer', borderRadius: '15px' }}
         onClick={onClick}
       >
-        <div style={{ height: '180px', overflow: 'hidden', backgroundColor: '#f8f9fa' }}>
+        <div style={{ height: '180px', overflow: 'hidden', backgroundColor: '#f8f9fa', borderRadius: '15px 15px 0 0' }}>
           <img 
             src={item.image} 
             className="card-img-top" 
             alt={item.name} 
-            style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '10px' }} 
+            style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '15px' }} 
           />
         </div>
         <div className="card-body">
@@ -34,69 +35,39 @@ const SearchResultCard = ({ item, onClick }) => {
 
 const TechPage = () => {
   const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [sortType, setSortType] = useState('default'); // State untuk Sorting
-
-  // 1. Ambil semua produk kategori tech
-  const techProducts = products.filter(item => item.category === 'tech');
-
-  // 2. Filter produk berdasarkan pencarian
-  const filteredSearch = techProducts.filter((item) =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  // 3. Logika Sorting
-  const getSortedProducts = (data) => {
-    let sortedData = [...data];
-    if (sortType === 'low') {
-      sortedData.sort((a, b) => a.price - b.price);
-    } else if (sortType === 'high') {
-      sortedData.sort((a, b) => b.price - a.price);
-    }
-    return sortedData;
-  };
-
-  const displayProducts = getSortedProducts(filteredSearch);
-
-  // Data untuk tampilan awal (Default)
-  const trendingTech = techProducts.slice(0, 6);
-  const recommendations = techProducts.slice(6, 14);
-
-  const brands = [
-    'APPLE', 'SAMSUNG', 'SONY', 'ASUS', 'LENOVO',
-    'DELL', 'HP', 'LOGITECH', 'RAZER',
-    'XIAOMI', 'INTEL', 'NVIDIA'
-  ];
+  const {
+    searchTerm, setSearchTerm,
+    sortType, setSortType,
+    displayProducts, trendingTech, recommendations
+  } = useTechLogic(products);
 
   return (
     <>
       <Navbar />
-      
-      <div className="tech-page" style={{ paddingBottom: '80px' }}>
-
-        {/* ================= HERO, SEARCH & SORT ================= */}
-        <section className="hero-section text-center py-5">
+      <div className="tech-page" style={{ paddingBottom: '80px', paddingTop: '100px' }}>
+        
+        <section className="hero-section text-center py-5 animate-card">
           <div className="container">
-            <h1 className="fw-bold text-gold">Tech Collection</h1>
-            <p className="text-muted">Discover the latest technology and innovation</p>
+            <h1 className="fw-bold text-gold mb-2">Tech Collection</h1>
+            <p className="text-muted px-3">Discover the latest technology and innovation</p>
             
-            <div className="row justify-content-center mt-4 g-2">
-              <div className="col-md-5">
+            <div className="row justify-content-center mt-4 g-2 px-3">
+              <div className="col-12 col-md-5">
                 <input
                   type="text"
                   className="form-control form-control-lg shadow-sm"
-                  placeholder="Search gadgets, laptops, or accessories..."
+                  placeholder="Search gadgets..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  style={{ borderRadius: '30px', border: '2px solid #D4AF37' }}
+                  style={{ borderRadius: '30px', border: '2px solid #D4AF37', fontSize: '0.9rem' }}
                 />
               </div>
-              <div className="col-md-2">
+              <div className="col-12 col-md-2">
                 <select 
                   className="form-select form-select-lg shadow-sm"
                   value={sortType}
                   onChange={(e) => setSortType(e.target.value)}
-                  style={{ borderRadius: '30px', border: '2px solid #D4AF37', fontSize: '1rem' }}
+                  style={{ borderRadius: '30px', border: '2px solid #D4AF37', fontSize: '0.9rem' }}
                 >
                   <option value="default">Sort: Default</option>
                   <option value="low">Price: Low to High</option>
@@ -108,77 +79,49 @@ const TechPage = () => {
         </section>
 
         {searchTerm || sortType !== 'default' ? (
-          /* ================= TAMPILAN HASIL SEARCH / SORT ================= */
           <section className="search-results py-5 bg-light min-vh-100">
             <div className="container">
-              <h3 className="mb-4">
+              <h3 className="mb-4 px-2">
                 {searchTerm ? `Results for: "${searchTerm}"` : "All Tech Products"}
               </h3>
               {displayProducts.length > 0 ? (
-                <div className="row">
-                  {displayProducts.map((item) => (
+                <div className="row g-3 px-2">
+                  {displayProducts.map((item, index) => (
                     <SearchResultCard 
                       key={item.id} 
                       item={item} 
+                      index={index}
                       onClick={() => navigate(`/product/${item.id}`)} 
                     />
                   ))}
                 </div>
               ) : (
-                <div className="text-center py-5">
+                <div className="text-center py-5 animate-card">
                   <h5 className="text-muted">No tech products found.</h5>
                 </div>
               )}
             </div>
           </section>
         ) : (
-          /* ================= TAMPILAN DEFAULT ================= */
           <>
             <section className="trending py-5 bg-light">
               <div className="container">
-                <h2 className="fw-semibold text-gold mb-3">Trending Tech</h2>
-                <div className="d-flex flex-nowrap overflow-auto pb-3">
-                  {trendingTech.map(item => (
+                <h2 className="fw-semibold text-gold mb-3 px-2">Trending Tech</h2>
+                <div className="d-flex flex-nowrap overflow-auto pb-3 px-2">
+                  {trendingTech.map((item, index) => (
                     <div
                       key={item.id}
-                      className="card me-3 flex-shrink-0 shadow-sm"
-                      style={{ width: '180px', cursor: 'pointer' }}
+                      className="card me-3 flex-shrink-0 shadow-sm tech-card-hover animate-card"
+                      style={{ width: '160px', cursor: 'pointer', borderRadius: '12px', animationDelay: `${index * 0.1}s` }}
                       onClick={() => navigate(`/product/${item.id}`)}
                     >
-                      <div style={{ height: '150px', overflow: 'hidden', padding: '10px' }}>
-                        <img 
-                          src={item.image} 
-                          className="card-img-top h-100 w-100" 
-                          alt={item.name} 
-                          style={{ objectFit: 'contain' }} 
-                        />
+                      <div style={{ height: '140px', overflow: 'hidden', padding: '10px' }}>
+                        <img src={item.image} className="card-img-top h-100 w-100" alt={item.name} style={{ objectFit: 'contain' }} />
                       </div>
-                      <div className="card-body text-center">
-                        <h6 className="card-title small text-truncate">{item.name}</h6>
-                        <p className="fw-bold text-gold mb-0">
-                          Rp {item.price.toLocaleString('id-ID')}
-                        </p>
+                      <div className="card-body text-center p-2 pb-3">
+                        <h6 className="card-title small text-truncate mb-1">{item.name}</h6>
+                        <p className="fw-bold text-gold mb-0 small">Rp {item.price.toLocaleString('id-ID')}</p>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
-
-            <section className="brands py-5">
-              <div className="container">
-                <div className="d-flex justify-content-between align-items-center mb-3">
-                  <h2 className="fw-semibold text-gold mb-0">Top Tech Brands</h2>
-                  <span className="text-gold small" style={{ cursor: 'pointer' }}>See All →</span>
-                </div>
-                <div className="d-flex flex-nowrap overflow-auto pb-3">
-                  {brands.map((brand, index) => (
-                    <div
-                      key={index}
-                      className="text-center p-4 me-3 rounded bg-light border flex-shrink-0"
-                      style={{ minWidth: '120px', fontWeight: 'bold', fontSize: '0.9rem' }}
-                    >
-                      {brand}
                     </div>
                   ))}
                 </div>
@@ -188,22 +131,16 @@ const TechPage = () => {
             <section className="recommendations py-5 bg-light">
               <div className="container">
                 <h2 className="text-center mb-4 fw-semibold text-gold">Recommended for You</h2>
-                <div className="row">
-                  {recommendations.map(item => (
-                    <div key={item.id} className="col-6 col-md-3 mb-4">
-                      <div
-                        className="card h-100 border-0 shadow-sm"
-                        style={{ cursor: 'pointer' }}
-                        onClick={() => navigate(`/product/${item.id}`)}
-                      >
-                        <div style={{ height: '200px', padding: '15px' }}>
+                <div className="row g-3 px-2">
+                  {recommendations.map((item, index) => (
+                    <div key={item.id} className="col-6 col-md-3 mb-4 animate-card" style={{ animationDelay: `${index * 0.05}s` }}>
+                      <div className="card h-100 border-0 shadow-sm tech-card-hover" style={{ cursor: 'pointer', borderRadius: '15px' }} onClick={() => navigate(`/product/${item.id}`)}>
+                        <div style={{ height: '180px', padding: '15px' }}>
                           <img src={item.image} className="card-img-top h-100 w-100" alt={item.name} style={{ objectFit: 'contain' }} />
                         </div>
                         <div className="card-body">
-                          <h6 className="card-title small fw-bold">{item.name}</h6>
-                          <p className="fw-bold text-gold mb-0">
-                            Rp {item.price.toLocaleString('id-ID')}
-                          </p>
+                          <h6 className="card-title small fw-bold text-truncate">{item.name}</h6>
+                          <p className="fw-bold text-gold mb-0">Rp {item.price.toLocaleString('id-ID')}</p>
                         </div>
                       </div>
                     </div>
@@ -215,7 +152,7 @@ const TechPage = () => {
         )}
 
         <footer className="text-center py-4 bg-white border-top">
-          <p className="mb-0 text-muted">© 2025 Laudepedia Tech. All Rights Reserved.</p>
+          <p className="mb-0 text-muted small">© 2025 Laudepedia Tech. All Rights Reserved.</p>
         </footer>
       </div>
       <BottomNav />

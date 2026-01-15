@@ -1,30 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import BottomNav from '../components/BottomNav';
+import { getProcessedBeauty, animationSettings } from '../js/beauty';
+import '../css/Beauty.css';
 
-/* ================= REUSABLE CARD (SAMA SEPERTI SEBELUMNYA) ================= */
-const TrendingProductCard = ({ item, onClick }) => (
-  <div className="card me-3 flex-shrink-0" style={{ width: '180px', cursor: 'pointer' }} onClick={onClick}>
-    <div style={{ height: '180px', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }}>
-      <img src={item.img} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-    </div>
-    <div className="card-body text-center">
-      <h6 className="card-title small">{item.name}</h6>
-      <p className="fw-bold text-gold mb-0">{item.price}</p>
-    </div>
-  </div>
-);
-
-const SearchResultCard = ({ item, onClick }) => (
-  <div className="col-6 col-md-3 mb-4">
-    <div className="card h-100 shadow-sm border-0" style={{ cursor: 'pointer' }} onClick={onClick}>
-      <div style={{ height: '200px', overflow: 'hidden' }}>
-        <img src={item.img} className="card-img-top" alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+const BeautyCard = ({ item, onClick, index, isTrending = false }) => (
+  <div 
+    className={`${isTrending ? 'me-3 flex-shrink-0' : 'col-6 col-md-3 mb-4'} reveal-item`} 
+    style={{ ...animationSettings(index), width: isTrending ? '160px' : '' }}
+    onClick={onClick}
+  >
+    <div className="card h-100 border-0 shadow-sm beauty-card-animated">
+      <div className="beauty-img-container">
+        <img src={item.img} className="card-img-top" alt={item.name} />
       </div>
-      <div className="card-body">
-        <h6 className="card-title text-truncate">{item.name}</h6>
-        <p className="fw-bold text-gold mb-0">{item.price}</p>
+      <div className="card-body p-2 p-md-3 text-center">
+        <h6 className="card-title small text-truncate fw-bold">{item.name}</h6>
+        <p className="fw-bold text-gold mb-0 small">{item.price}</p>
       </div>
     </div>
   </div>
@@ -33,9 +26,8 @@ const SearchResultCard = ({ item, onClick }) => (
 const BeautyPage = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
-  const [sortType, setSortType] = useState('default'); // State untuk Sorting
+  const [sortType, setSortType] = useState('default');
 
-  /* ================= DATA SUMBER ================= */
   const trendingBeauty = [
     { id: 'y1', name: 'Dior Forever Skin Glow', priceNum: 950000, price: 'Rp 950.000', img: '/resources/Y1.jpg' },
     { id: 'y2', name: 'Chanel Rouge Allure Velvet', priceNum: 720000, price: 'Rp 720.000', img: '/resources/Y2.jpg' },
@@ -56,53 +48,33 @@ const BeautyPage = () => {
     { id: 'y14', name: 'Charlotte Tilbury Airbrush Powder', priceNum: 750000, price: 'Rp 750.000', img: '/resources/Y14.jpg' },
   ];
 
-  const brands = ['DIOR', 'CHANEL', 'YSL', 'RARE BEAUTY', 'SK-II', 'ESTÉE LAUDER', 'LANEIGE', 'MAC', 'FENTY BEAUTY', 'NARS'];
-
-  /* ================= LOGIKA SEARCH & SORT ================= */
-  const allProducts = [...trendingBeauty, ...recommendations];
-
-  const getProcessedProducts = () => {
-    // 1. Filter dulu berdasarkan search
-    let filtered = allProducts.filter((p) =>
-      p.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
-    // 2. Kemudian Sort berdasarkan pilihan
-    if (sortType === 'low') {
-      filtered.sort((a, b) => a.priceNum - b.priceNum);
-    } else if (sortType === 'high') {
-      filtered.sort((a, b) => b.priceNum - a.priceNum);
-    }
-    return filtered;
-  };
-
-  const displayProducts = getProcessedProducts();
+  const displayProducts = useMemo(() => 
+    getProcessedBeauty([...trendingBeauty, ...recommendations], searchTerm, sortType),
+    [searchTerm, sortType]
+  );
 
   return (
     <>
       <Navbar />
       <div className="beauty-page">
-        {/* ================= HERO & SEARCH & SORT ================= */}
-        <section className="hero-section text-center py-5 bg-white">
-          <div className="container">
-            <h1 className="fw-bold text-gold">Beauty Collection</h1>
-            <p className="text-muted mb-4">Discover premium beauty & skincare essentials</p>
+        <section className="hero-section text-center py-5 bg-white reveal-item">
+          <div className="container px-4">
+            <h1 className="fw-bold text-gold display-6">Beauty Collection</h1>
+            <p className="text-muted mb-4 small">Premium beauty & skincare essentials</p>
 
             <div className="row justify-content-center g-2">
-              <div className="col-md-5">
+              <div className="col-12 col-md-5">
                 <input
                   type="text"
-                  className="form-control form-control-lg border-2 shadow-sm"
+                  className="form-control form-control-lg beauty-input"
                   placeholder="Search products..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  style={{ borderRadius: '30px' }}
                 />
               </div>
-              <div className="col-md-2">
+              <div className="col-12 col-md-3">
                 <select 
-                  className="form-select form-select-lg border-2 shadow-sm"
-                  style={{ borderRadius: '30px', fontSize: '1rem', cursor: 'pointer' }}
+                  className="form-select form-select-lg beauty-input"
                   onChange={(e) => setSortType(e.target.value)}
                 >
                   <option value="default">Sort: Default</option>
@@ -114,78 +86,37 @@ const BeautyPage = () => {
           </div>
         </section>
 
-        {/* ================= HASIL SEARCH / SORT ================= */}
-        {searchTerm || sortType !== 'default' ? (
-          <section className="search-results py-5 bg-light min-vh-100">
-            <div className="container">
-              <div className="d-flex justify-content-between align-items-center mb-4">
-                <h3>
-                  {searchTerm ? `Results for "${searchTerm}"` : 'All Products'}
-                </h3>
-                <span className="badge bg-gold text-dark p-2">Total: {displayProducts.length} items</span>
+        <section className="content-area py-4 bg-light min-vh-100">
+          <div className="container px-3">
+            {searchTerm || sortType !== 'default' ? (
+              <div className="row g-2 g-md-4">
+                <h5 className="mb-3 px-2">Results ({displayProducts.length})</h5>
+                {displayProducts.map((item, idx) => (
+                  <BeautyCard key={item.id} item={item} index={idx} onClick={() => navigate(`/product/${item.id}`)} />
+                ))}
               </div>
-              
-              <div className="row">
-                {displayProducts.length > 0 ? (
-                  displayProducts.map((item) => (
-                    <SearchResultCard key={item.id} item={item} onClick={() => navigate(`/product/${item.id}`)} />
-                  ))
-                ) : (
-                  <div className="text-center py-5 w-100">
-                    <h5 className="text-muted">No products found.</h5>
-                  </div>
-                )}
-              </div>
-            </div>
-          </section>
-        ) : (
-          /* ================= TAMPILAN NORMAL ================= */
-          <>
-            <section className="trending py-5 bg-light">
-              <div className="container">
-                <h2 className="fw-semibold text-gold mb-3">Trending Beauty</h2>
-                <div className="d-flex flex-nowrap overflow-auto pb-3">
-                  {trendingBeauty.map((item) => (
-                    <TrendingProductCard key={item.id} item={item} onClick={() => navigate(`/product/${item.id}`)} />
+            ) : (
+              <>
+                <h4 className="fw-semibold text-gold mb-3 reveal-item">Trending Beauty</h4>
+                <div className="d-flex flex-nowrap overflow-auto pb-4 custom-scroll mb-4">
+                  {trendingBeauty.map((item, idx) => (
+                    <BeautyCard key={item.id} item={item} index={idx} isTrending onClick={() => navigate(`/product/${item.id}`)} />
                   ))}
                 </div>
-              </div>
-            </section>
 
-            <section className="brands py-5">
-              <div className="container">
-                <h2 className="fw-semibold text-gold mb-3">Top Beauty Brands</h2>
-                <div className="d-flex flex-nowrap overflow-auto pb-3">
-                  {brands.map((brand, index) => (
-                    <div key={index} className="text-center p-4 me-3 rounded bg-light border flex-shrink-0" style={{ minWidth: '120px' }}>{brand}</div>
+                <h4 className="fw-semibold text-gold mb-3 text-center reveal-item">For You</h4>
+                <div className="row g-2 g-md-4">
+                  {recommendations.map((item, idx) => (
+                    <BeautyCard key={item.id} item={item} index={idx} onClick={() => navigate(`/product/${item.id}`)} />
                   ))}
                 </div>
-              </div>
-            </section>
-
-            <section className="recommendations py-5 bg-light">
-              <div className="container">
-                <h2 className="text-center mb-4 fw-semibold text-gold">Recommended for You</h2>
-                <div className="row">
-                  {recommendations.map((item) => (
-                    <div key={item.id} className="col-6 col-md-3 mb-4">
-                      <div className="card h-100 border-0 shadow-sm" style={{ cursor: 'pointer' }} onClick={() => navigate(`/product/${item.id}`)}>
-                        <img src={item.img} className="card-img-top" alt={item.name} />
-                        <div className="card-body">
-                          <h6 className="card-title">{item.name}</h6>
-                          <p className="fw-bold text-gold">{item.price}</p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
-          </>
-        )}
+              </>
+            )}
+          </div>
+        </section>
 
         <footer className="text-center py-4 bg-white border-top">
-          <p className="mb-0 text-muted">© 2025 Laudepedia Beauty. All Rights Reserved.</p>
+          <p className="mb-0 text-muted small">© 2025 Laudepedia Beauty.</p>
         </footer>
       </div>
       <BottomNav />
