@@ -3,6 +3,19 @@ import { useNavigate } from 'react-router-dom';
 import { handleNavigation } from '../js/navService';
 import '../css/Navbar.css';
 
+/**
+ * NAVBAR COMPONENT
+ * Komponen navigasi global yang menetap di bagian atas layar (Fixed Header).
+ * * * Hooks & Logic:
+ * - useNavigate: Hook - Fungsi dari React Router untuk perpindahan halaman tanpa reload.
+ * - navigate: Function(path: string) - Eksekutor navigasi (misal: navigate('/cart')).
+ * * * Data Structures & Styling:
+ * - Inline Style Object: Object - CSS ditulis langsung sebagai properti objek JavaScript (backgroundColor, zIndex, dll).
+ * - SVG Elements: JSX - Representasi grafis vektor untuk ikon keranjang.
+ * * * Events:
+ * - onClick: Event Handler - Memicu fungsi navigasi saat elemen (Logo/Ikon) diklik.
+ */
+
 const Navbar = () => {
   const navigate = useNavigate();
 
