@@ -2,23 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar'; 
 import BottomNav from '../components/BottomNav';
-import '../css/Cart.css'; // Kita pakai CSS baru agar rapi
-
-/**
- * ADD TO CART / CART PAGE COMPONENT
- * Halaman keranjang belanja yang menampilkan daftar produk yang dipilih user,
- * kalkulasi total harga (subtotal + ongkir), serta formulir checkout.
- * * State:
- * - cartItems: Array - Menyimpan daftar objek produk (id, name, price, qty, image) dari LocalStorage.
- * - address: String - Menyimpan input alamat pengiriman user.
- * - courier: String - Menyimpan opsi kurir yang dipilih (jne, jnt, sicepat, instant).
- * - payment: String - Menyimpan metode pembayaran yang dipilih (bca, cod, gopay).
- * * Functions:
- * - updateQuantity: Function (id, delta) - Menambah atau mengurangi jumlah item dalam keranjang.
- * - removeItem: Function (id) - Menghapus item spesifik dari keranjang setelah konfirmasi.
- * - getShippingCost: Function - Mengembalikan nilai ongkir (int) berdasarkan kurir yang dipilih.
- * - handleCheckout: Function - Memvalidasi form, menampilkan alert sukses, menghapus data cart, dan redirect ke home.
- */
+import '../css/Cart.css';
 
 const AddToCart = () => {
   const navigate = useNavigate();
@@ -27,7 +11,6 @@ const AddToCart = () => {
   // State Form Checkout
   const [address, setAddress] = useState('');
   const [courier, setCourier] = useState('jne');
-  const [payment, setPayment] = useState('bca');
 
   // Load data saat halaman dibuka
   useEffect(() => {
@@ -84,12 +67,14 @@ const AddToCart = () => {
       return;
     }
     
-    alert(`Checkout Successful!\n\nTotal: Rp ${grandTotal.toLocaleString('id-ID')}\nSent to: ${address}\nVia: ${courier.toUpperCase()}`);
+    alert(
+      `Checkout Successful!\n\nTotal: Rp ${grandTotal.toLocaleString('id-ID')}\nSent to: ${address}\nVia: ${courier.toUpperCase()}`
+    );
     
     // Kosongkan keranjang setelah beli
     setCartItems([]);
     localStorage.removeItem('cart');
-    navigate('/'); // Balik ke home
+    navigate('/');
   };
 
   return (
@@ -112,7 +97,9 @@ const AddToCart = () => {
                   </div>
                   <div className="cart-item-details">
                     <div className="cart-item-name">{item.name}</div>
-                    <div className="cart-item-price">Rp {item.price.toLocaleString('id-ID')}</div>
+                    <div className="cart-item-price">
+                      Rp {item.price.toLocaleString('id-ID')}
+                    </div>
                   </div>
                   <div className="cart-controls">
                     <button className="qty-btn" onClick={() => updateQuantity(item.id, -1)}>-</button>
@@ -143,20 +130,15 @@ const AddToCart = () => {
 
               <div className="form-group">
                 <label className="form-label">Shipping</label>
-                <select className="form-select" value={courier} onChange={e => setCourier(e.target.value)}>
+                <select 
+                  className="form-select" 
+                  value={courier} 
+                  onChange={e => setCourier(e.target.value)}
+                >
                   <option value="jne">JNE (15k)</option>
                   <option value="jnt">J&T (18k)</option>
                   <option value="sicepat">SiCepat (20k)</option>
                   <option value="instant">Instant (50k)</option>
-                </select>
-              </div>
-
-              <div className="form-group">
-                <label className="form-label">Payment</label>
-                <select className="form-select" value={payment} onChange={e => setPayment(e.target.value)}>
-                  <option value="bca">BCA Transfer</option>
-                  <option value="cod">COD</option>
-                  <option value="gopay">GoPay</option>
                 </select>
               </div>
 
@@ -165,7 +147,9 @@ const AddToCart = () => {
                 <span>Rp {grandTotal.toLocaleString('id-ID')}</span>
               </div>
 
-              <button className="checkout-btn" onClick={handleCheckout}>Order Now</button>
+              <button className="checkout-btn" onClick={handleCheckout}>
+                Order Now
+              </button>
             </div>
           )}
         </div>
