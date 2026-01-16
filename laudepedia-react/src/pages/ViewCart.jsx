@@ -43,7 +43,6 @@ const ViewCart = () => {
   const [formData, setFormData] = useState({
     address: '',
     courier: 'jne',
-    payment: 'bca'
   });
 
   useEffect(() => {
